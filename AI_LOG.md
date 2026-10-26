@@ -21,4 +21,9 @@
 [2026-10-26 18:31] Major | Antigravity | Bash | Downloaded 364 new card images (now 1035 files, 284MB)
 [2026-10-26 18:33] Major | Antigravity | Edit | .gitignore - ignored public/card-images/ & removed from git history
 [2026-10-26 18:33] Major | Antigravity | Bash | Force pushed lightweight commit to GitHub (images kept local only)
+[2026-10-26 18:37] Major | Antigravity | Bash | Created Cloudflare R2 bucket talingchancount-cards (APAC)
+[2026-10-26 18:37] Major | Antigravity | Bash | Enabled R2 managed public domain pub-851c7b1da9514507a99b79bc2fd47577.r2.dev
+[2026-10-26 18:38] Major | Antigravity | Write | scripts/upload-to-r2.mjs - R2 S3 sync script
+[2026-10-26 18:38] Major | Antigravity | Bash | Uploaded 1390 card images to R2 bucket in 43.8s
+[2026-10-26 18:39] Major | Antigravity | Edit | src/utils/cardImage.ts - added R2 CDN fallback url
 

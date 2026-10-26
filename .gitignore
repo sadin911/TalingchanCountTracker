@@ -28,9 +28,12 @@ dist-ssr
 playwright-report
 test-results
 
-# Environment
+# Environment & Secrets
 .env
 .env.production
+.env*.local
+secret.yaml
+secret*.yaml
 
 # Card Images (stored locally or Cloudflare R2, not in Git repository)
 public/card-images/
