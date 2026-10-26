@@ -1,0 +1,23 @@
+[
+  {
+    "code": "BT01",
+    "name": "Welcome ตลิ่งชัน",
+    "type": "Booster",
+    "releasedAt": "2024-01-20",
+    "cardCount": 50
+  },
+  {
+    "code": "SD01",
+    "name": "ตงิดแค้น",
+    "type": "Starter",
+    "releasedAt": "2024-01-15",
+    "cardCount": 20
+  },
+  {
+    "code": "SD02",
+    "name": "วีรบุรุษปากซอย",
+    "type": "Starter",
+    "releasedAt": "2024-01-15",
+    "cardCount": 20
+  }
+]
