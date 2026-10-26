@@ -12,3 +12,11 @@
 [2026-10-26 18:15] Major | Antigravity | Write | scripts/scrape_wiki_cards.py - automated wiki card & set scraper
 [2026-10-26 18:16] Major | Antigravity | Bash | Scraped 934 cards across 37 sets into talingchanCards.json
 [2026-10-26 18:17] Major | Antigravity | Test | Verified Vitest, Oxlint, Vite build, and Playwright E2E suites
+[2026-10-26 18:20] Major | Antigravity | Write | scripts/download_card_images.py - multi-threaded image scraper
+[2026-10-26 18:22] Major | Antigravity | Bash | Downloaded 881 card images (202MB) into public/card-images/
+[2026-10-26 18:22] Major | Antigravity | Edit | src/utils/cardImage.ts - local & remote image fallback resolver
+[2026-10-26 18:23] Minor | Antigravity | Browser | Verified card artwork images rendering in browser
+[2026-10-26 18:30] Major | Antigravity | Write | scripts/scrape_all_sets_and_cards.py - checklist table scraper
+[2026-10-26 18:31] Major | Antigravity | Bash | Added 571 cards (now 1505 total) across all 37 sets
+[2026-10-26 18:31] Major | Antigravity | Bash | Downloaded 364 new card images (now 1035 files, 284MB)
+

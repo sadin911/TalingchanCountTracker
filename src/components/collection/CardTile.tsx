@@ -34,9 +34,9 @@ export function CardTile({ card, onSelectCard }: CardTileProps) {
         className="relative aspect-[3/4] w-full overflow-hidden bg-[#181c2e] cursor-pointer"
       >
         <img
-          src={resolveCardImageUrl(card.setCode, card.collectorNumber, false)}
+          src={resolveCardImageUrl(card, false)}
           alt={card.name}
-          onError={handleCardImageError}
+          onError={(e) => handleCardImageError(e, card.imageUrl)}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />

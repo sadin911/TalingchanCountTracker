@@ -55,9 +55,9 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
         <div className="w-full md:w-5/12 bg-[#181c2e] p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-800">
           <div className="relative aspect-[3/4] w-48 md:w-full rounded-xl overflow-hidden shadow-2xl border border-slate-700/60">
             <img
-              src={resolveCardImageUrl(card.setCode, card.collectorNumber, true)}
+              src={resolveCardImageUrl(card, true)}
               alt={card.name}
-              onError={handleCardImageError}
+              onError={(e) => handleCardImageError(e, card.imageUrl)}
               className="w-full h-full object-cover"
             />
           </div>

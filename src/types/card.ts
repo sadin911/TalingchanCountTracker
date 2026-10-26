@@ -46,6 +46,7 @@ export interface TalingchanCard {
   effect: string;
   rarityVariants: string[];
   finishes: FinishKey[];
+  imageUrl?: string;
 }
 
 export interface TalingchanSet {

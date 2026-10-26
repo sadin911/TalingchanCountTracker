@@ -31,3 +31,7 @@ test-results
 # Environment
 .env
 .env.production
+
+# Card Images (stored locally or Cloudflare R2, not in Git repository)
+public/card-images/
+public/card-images-hd/

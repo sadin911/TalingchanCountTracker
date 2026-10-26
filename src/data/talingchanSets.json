@@ -4,35 +4,35 @@
     "name": "Welcome ตลิ่งชัน",
     "type": "Booster",
     "releasedAt": "2024-01-12",
-    "cardCount": 41
+    "cardCount": 55
   },
   {
     "code": "BT02",
     "name": "Attack on เพื่อนบ้าน",
     "type": "Booster",
     "releasedAt": "2024-03-29",
-    "cardCount": 8
+    "cardCount": 59
   },
   {
     "code": "BT03",
     "name": "อมนุษย์ Invasion",
     "type": "Booster",
     "releasedAt": "2024-05-31",
-    "cardCount": 6
+    "cardCount": 60
   },
   {
     "code": "BT04",
     "name": "ความจริง Today",
     "type": "Booster",
     "releasedAt": "2024-07-26",
-    "cardCount": 2
+    "cardCount": 59
   },
   {
     "code": "BT05",
     "name": "Culture ช็อค",
     "type": "Booster",
     "releasedAt": "2024-09-27",
-    "cardCount": 71
+    "cardCount": 75
   },
   {
     "code": "BT06",
@@ -60,35 +60,35 @@
     "name": "มิตรภาพและสายฟ้า",
     "type": "Booster",
     "releasedAt": "2025-05-30",
-    "cardCount": 48
+    "cardCount": 75
   },
   {
     "code": "BT10",
     "name": "อันธการไร้นาม",
     "type": "Booster",
     "releasedAt": "2025-07-25",
-    "cardCount": 70
+    "cardCount": 85
   },
   {
     "code": "BT11",
     "name": "Journey to นคร Z",
     "type": "Booster",
     "releasedAt": "2025-09-26",
-    "cardCount": 70
+    "cardCount": 76
   },
   {
     "code": "BT12",
     "name": "ทำไงดี ??!! เกิดใหม่ทั้งทีก็ต้องมานั่งเล่นการ์ดท่ามกลางคนไม่ปกติในตลิ่งชันซะแล้ว",
     "type": "Booster",
     "releasedAt": "2025-11-28",
-    "cardCount": 37
+    "cardCount": 73
   },
   {
     "code": "BT13",
     "name": "Battle of Gods",
     "type": "Booster",
     "releasedAt": "2026-01-30",
-    "cardCount": 2
+    "cardCount": 5
   },
   {
     "code": "SD01",
@@ -109,7 +109,7 @@
     "name": "นรกก็แค่น้ำพริก",
     "type": "Starter",
     "releasedAt": "2023-12-15",
-    "cardCount": 24
+    "cardCount": 25
   },
   {
     "code": "SD04",
@@ -123,63 +123,63 @@
     "name": "กำเนิดจากน้ำ",
     "type": "Starter",
     "releasedAt": "2024-04-19",
-    "cardCount": 24
+    "cardCount": 25
   },
   {
     "code": "SD06",
     "name": "๖ ประจัญบาน",
     "type": "Starter",
     "releasedAt": "2024-06-21",
-    "cardCount": 23
+    "cardCount": 25
   },
   {
     "code": "SD07",
     "name": "VS 18 หัวเมือง",
     "type": "Starter",
     "releasedAt": "2024-08-23",
-    "cardCount": 19
+    "cardCount": 25
   },
   {
     "code": "SD08",
     "name": "กองทัพตัวจี๊ดหัวใจยึดโลก",
     "type": "Starter",
     "releasedAt": "2024-10-25",
-    "cardCount": 19
+    "cardCount": 26
   },
   {
     "code": "SD09",
     "name": "ลิงกว่านรก",
     "type": "Starter",
     "releasedAt": "2024-12-20",
-    "cardCount": 25
+    "cardCount": 26
   },
   {
     "code": "SD10",
     "name": "บริษัทจุ้นเรื่องชาวบ้านไม่จำกัด",
     "type": "Starter",
     "releasedAt": "2025-02-21",
-    "cardCount": 3
+    "cardCount": 12
   },
   {
     "code": "SD11",
     "name": "พุธ 13",
     "type": "Starter",
     "releasedAt": "2025-04-18",
-    "cardCount": 3
+    "cardCount": 8
   },
   {
     "code": "CC01",
     "name": "Community Collection 01",
     "type": "Special",
     "releasedAt": "2024-03-01",
-    "cardCount": 34
+    "cardCount": 60
   },
   {
     "code": "CC02",
     "name": "Community Collection 02",
     "type": "Special",
     "releasedAt": "2024-07-01",
-    "cardCount": 36
+    "cardCount": 61
   },
   {
     "code": "CC03",
@@ -193,69 +193,69 @@
     "name": "อวาตาร์ลงทัณฑ์",
     "type": "Special",
     "releasedAt": "2024-05-10",
-    "cardCount": 4
+    "cardCount": 25
   },
   {
     "code": "KD02",
     "name": "พันธสัญญาโลหิต",
     "type": "Special",
     "releasedAt": "2024-07-12",
-    "cardCount": 4
+    "cardCount": 26
   },
   {
     "code": "KD03",
     "name": "มุ่งสู่ฝันเป็นที่ 1",
     "type": "Special",
     "releasedAt": "2024-09-13",
-    "cardCount": 3
+    "cardCount": 25
   },
   {
     "code": "KD04",
     "name": "ชะตากรแห่งจุดจบ",
     "type": "Special",
     "releasedAt": "2024-11-15",
-    "cardCount": 4
+    "cardCount": 26
   },
   {
     "code": "KD05",
     "name": "ไดโนกาฬสินธุ์ Crisis",
     "type": "Special",
     "releasedAt": "2025-01-17",
-    "cardCount": 3
+    "cardCount": 8
   },
   {
     "code": "ODY1",
     "name": "Odenya 01",
     "type": "Special",
     "releasedAt": "2024-02-01",
-    "cardCount": 43
+    "cardCount": 90
   },
   {
     "code": "RM01",
     "name": "Remix 01",
     "type": "Special",
     "releasedAt": "2024-12-06",
-    "cardCount": 0
+    "cardCount": 60
   },
   {
     "code": "SL01",
     "name": "Selection 01",
     "type": "Special",
     "releasedAt": "2024-10-11",
-    "cardCount": 1
+    "cardCount": 8
   },
   {
     "code": "SL02",
     "name": "Selection 02",
     "type": "Special",
     "releasedAt": "2025-02-14",
-    "cardCount": 0
+    "cardCount": 10
   },
   {
     "code": "B2SA",
     "name": "สมรภูมิ Passion",
     "type": "Special",
     "releasedAt": "2024-08-09",
-    "cardCount": 5
+    "cardCount": 10
   }
 ]
