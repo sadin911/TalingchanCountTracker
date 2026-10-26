@@ -26,4 +26,9 @@
 [2026-10-26 18:38] Major | Antigravity | Write | scripts/upload-to-r2.mjs - R2 S3 sync script
 [2026-10-26 18:38] Major | Antigravity | Bash | Uploaded 1390 card images to R2 bucket in 43.8s
 [2026-10-26 18:39] Major | Antigravity | Edit | src/utils/cardImage.ts - added R2 CDN fallback url
-
+[2026-10-26 18:44] Major | Antigravity | Bash | Created Cloudflare Pages project talingchancounttracker
+[2026-10-26 18:44] Major | Antigravity | Bash | Added custom domain & DNS CNAME talingchan.tcgcount.com
+[2026-10-26 18:45] Major | Antigravity | Write | Added public/_headers, _redirects, robots, sitemap & PWA icons
+[2026-10-26 18:46] Major | Antigravity | Deploy | Deployed v1.1.0 to Cloudflare Pages talingchancounttracker
+[2026-10-26 18:47] Minor | Antigravity | Browser | Verified live production site at https://talingchan.tcgcount.com
+[2026-10-26 18:49] Major | Antigravity | Release | v1.1.0 - Production release on Cloudflare Pages (talingchan.tcgcount.com)

@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://talingchan.tcgcount.com/sitemap.xml

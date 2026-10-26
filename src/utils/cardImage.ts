@@ -1,18 +1,24 @@
 import type React from 'react';
 import type { TalingchanCard } from '../types/card.ts';
 
-export const DEFAULT_CARD_PLACEHOLDER = '/card-placeholder.svg';
+export const DEFAULT_CARD_PLACEHOLDER = `${import.meta.env.BASE_URL || '/'}card-placeholder.svg`.replace('//', '/');
 export const R2_PUBLIC_BASE_URL = 'https://pub-851c7b1da9514507a99b79bc2fd47577.r2.dev';
+export const R2_CDN_BASE = R2_PUBLIC_BASE_URL;
 
 export function cardImageKey(setCode: string, collectorNumber: string, large = false): string {
   const dir = large ? 'card-images-lg' : 'card-images';
   return `${dir}/${setCode}/${collectorNumber}.webp`;
 }
 
+/**
+ * Resolves a card image path to its best URL.
+ * - In Production (Cloudflare Pages/Web): routes directly to Cloudflare R2 CDN.
+ * - In Local Dev: uses local asset path (/card-images/...) for instant offline loading.
+ */
 export function resolveCardImageUrl(
   cardOrSetCode?: string | Partial<Pick<TalingchanCard, 'id' | 'setCode' | 'collectorNumber' | 'imageUrl'>> | null,
   collectorNumberOrLarge?: string | boolean | null,
-  _large = false
+  large = false
 ): string {
   if (!cardOrSetCode) return DEFAULT_CARD_PLACEHOLDER;
 
@@ -27,10 +33,18 @@ export function resolveCardImageUrl(
   } else if (typeof cardOrSetCode === 'string') {
     setCode = cardOrSetCode;
     collectorNumber = typeof collectorNumberOrLarge === 'string' ? collectorNumberOrLarge : '';
+    if (typeof collectorNumberOrLarge === 'boolean') {
+      large = collectorNumberOrLarge;
+    }
   }
 
   if (setCode && collectorNumber) {
-    return `/card-images/${setCode}/${collectorNumber}.webp`;
+    const key = cardImageKey(setCode, collectorNumber, large);
+    // In Production, resolve directly to Cloudflare R2 CDN
+    if (import.meta.env.PROD) {
+      return `${R2_CDN_BASE}/${key}`;
+    }
+    return `/${key}`;
   }
 
   if (remoteUrl) {
@@ -48,9 +62,14 @@ export function handleCardImageError(
   const target = e.currentTarget;
   if (!target) return;
 
+  // Prevent infinite loop if placeholder fails
+  if (target.src.includes('card-placeholder.svg')) {
+    return;
+  }
+
   // 1. Try Cloudflare R2 CDN if local failed
   if (card?.setCode && card?.collectorNumber) {
-    const r2Url = `${R2_PUBLIC_BASE_URL}/card-images/${card.setCode}/${card.collectorNumber}.webp`;
+    const r2Url = `${R2_CDN_BASE}/${cardImageKey(card.setCode, card.collectorNumber)}`;
     if (target.src !== r2Url) {
       target.src = r2Url;
       return;
@@ -64,7 +83,6 @@ export function handleCardImageError(
   }
 
   // 3. Final fallback to placeholder SVG
-  if (!target.src.includes('card-placeholder.svg')) {
-    target.src = DEFAULT_CARD_PLACEHOLDER;
-  }
+  target.src = DEFAULT_CARD_PLACEHOLDER;
 }
+
