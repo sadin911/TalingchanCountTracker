@@ -19,4 +19,6 @@
 [2026-10-26 18:30] Major | Antigravity | Write | scripts/scrape_all_sets_and_cards.py - checklist table scraper
 [2026-10-26 18:31] Major | Antigravity | Bash | Added 571 cards (now 1505 total) across all 37 sets
 [2026-10-26 18:31] Major | Antigravity | Bash | Downloaded 364 new card images (now 1035 files, 284MB)
+[2026-10-26 18:33] Major | Antigravity | Edit | .gitignore - ignored public/card-images/ & removed from git history
+[2026-10-26 18:33] Major | Antigravity | Bash | Force pushed lightweight commit to GitHub (images kept local only)
 
