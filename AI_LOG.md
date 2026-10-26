@@ -32,3 +32,6 @@
 [2026-10-26 18:46] Major | Antigravity | Deploy | Deployed v1.1.0 to Cloudflare Pages talingchancounttracker
 [2026-10-26 18:47] Minor | Antigravity | Browser | Verified live production site at https://talingchan.tcgcount.com
 [2026-10-26 18:49] Major | Antigravity | Release | v1.1.0 - Production release on Cloudflare Pages (talingchan.tcgcount.com)
+[2026-10-26 18:51] Major | Antigravity | Deploy | wrangler deploy - deployed Cloudflare Worker talingchancounttracker
+[2026-10-26 18:52] Major | Antigravity | Bash | Attached Worker custom domain talingchan.tcgcount.com (AAAA 100::)
+[2026-10-26 18:52] Major | Antigravity | Release | v1.1.1 - Unified Cloudflare Worker Static Assets architecture

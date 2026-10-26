@@ -1,11 +1,12 @@
 {
   "name": "talingchancounttracker",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.1.1",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "deploy": "npm run build && npx wrangler deploy",
     "lint": "oxlint",
     "preview": "vite preview",
     "test": "vitest run",

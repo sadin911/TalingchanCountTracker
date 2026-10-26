@@ -54,12 +54,14 @@ Every agent MUST maintain [`AI_LOG.md`](file:///Users/sadin/Project/TalingchanCo
 
 ---
 
-## 3. Cloudflare Deployment Architecture (Workers & Pages Static Assets via wrangler.jsonc)
+## 3. Cloudflare Deployment Architecture (Workers Static Assets via wrangler.jsonc)
 
-- **Domain**: `talingchan.tcgcount.com`
+- **Domain**: `talingchan.tcgcount.com` (Worker Custom Domain on zone `tcgcount.com`)
+- **Worker Service**: `talingchancounttracker`
+- **Deploy Command**: `npm run deploy` (`npm run build && npx wrangler deploy`)
 - **R2 Card Image CDN**: `https://pub-851c7b1da9514507a99b79bc2fd47577.r2.dev`
 - **Binary Image Assets**: NEVER commit `public/card-images/` to Git. Card images are served via Cloudflare R2 CDN in production.
-- **SPA Routing & Assets**: Configured with `wrangler.jsonc` and `public/_headers` / `public/_redirects`.
+- **SPA Routing**: Configured natively via `wrangler.jsonc` (`not_found_handling: "single-page-application"`). Do not create `_redirects` as Workers Assets handles SPA rewrites natively.
 
 ---
 
