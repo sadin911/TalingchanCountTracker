@@ -20,7 +20,7 @@ test.describe('Collection Tracker E2E', () => {
 
     // Verify modal content
     await expect(page.getByText('ความสามารถการ์ด (Effect):')).toBeVisible();
-    await expect(page.getByText('เมื่อการ์ดใบนี้สั่งโจมตี Avatar เทพ')).toBeVisible();
+    await expect(page.getByText('เมื่อการ์ดใบนี้สั่งโจมตี Avatar')).toBeVisible();
 
     // Press Escape to close modal
     await page.keyboard.press('Escape');
