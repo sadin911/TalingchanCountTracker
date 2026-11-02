@@ -35,3 +35,26 @@
 [2026-10-26 18:51] Major | Antigravity | Deploy | wrangler deploy - deployed Cloudflare Worker talingchancounttracker
 [2026-10-26 18:52] Major | Antigravity | Bash | Attached Worker custom domain talingchan.tcgcount.com (AAAA 100::)
 [2026-10-26 18:52] Major | Antigravity | Release | v1.1.1 - Unified Cloudflare Worker Static Assets architecture
+[2026-11-03 00:04] Minor | Antigravity | Read | Explored TalingchanCountTracker & PokeCountTracker Playmat V3
+[2026-11-03 00:04] Minor | Antigravity | Search | Researched Battle of Talingchan Rule Book Ver 3.0 zones & turn flow
+[2026-11-03 00:13] Major | Antigravity | Write | docs/superpowers/specs/2026-11-03-talingchan-solo-playmat-and-auth-design.md
+[2026-11-03 00:14] Major | Antigravity | Bash | Created branch feat/solo-playmat-and-auth
+[2026-11-03 00:14] Major | Antigravity | Write | docs/superpowers/plans/2026-11-03-talingchan-solo-playmat-and-auth.md
+[2026-11-03 00:21] Major | Antigravity | Write | src/types/playmat.ts & src/constants/starterDecks.ts
+[2026-11-03 00:21] Major | Antigravity | Write | src/utils/talingchanTabletopHelper.ts & unit tests (10/10 pass)
+[2026-11-03 00:30] Major | Antigravity | Bash | npm install firebase
+[2026-11-03 00:30] Major | Antigravity | Write | src/utils/firebase.ts & src/store/authStore.ts
+[2026-11-03 00:30] Major | Antigravity | Edit | src/store/collectionStore.ts & deckStore.ts - Cloud sync & JSON backup
+[2026-11-03 00:36] Major | Antigravity | Write | src/components/playmat/* - Solo Playmat UI & Modals
+[2026-11-03 00:36] Major | Antigravity | Write | src/components/layout/AccountMenu.tsx & Navbar/App/DeckPage integration
+[2026-11-03 00:37] Major | Antigravity | Write | e2e/playmat.spec.ts - Playwright E2E for Playmat & Auth
+[2026-11-03 00:37] Major | Antigravity | Test | Passed Oxlint, Vite build, Vitest (27/27) & Playwright (4/4)
+[2026-11-03 00:38] Major | Antigravity | Edit | Bumped version to v1.2.0 in package.json & version.ts
+[2026-11-03 00:38] Major | Antigravity | Release | v1.2.0 - Solo Practice Playmat (Expandable Avatar Zone) & Firebase Cloud Auth
+[2026-11-03 01:12] Major | Antigravity | Edit | src/components/playmat/* - overhauled Playmat UI/UX to full-viewport Tabletop V3 (no-scroll arena, Balatro hand fan, 1-click/drag slot placement, inline cost/attack targeting)
+[2026-11-03 02:01] Major | Antigravity | Edit | src/components/playmat/*, src/data/talingchanCards.json - fixed Life Card horizontal stack & catalog types, added drag-and-drop Gem Zone
+[2026-11-04 11:48] Major | Antigravity | Edit | src/store/authStore.ts, src/components/layout/AccountMenu.tsx - added Thai guidance for auth/configuration-not-found
+[2026-11-04 11:58] Major | Antigravity | Write | firestore.rules, firebase.json - deployed production Firestore security rules to botcounttracker
+[2026-11-04 12:08] Major | Antigravity | Edit | firestore.rules, firebase.json, .firebaserc - align rules with PokeCountTracker & deploy to botcounttracker
+[2026-11-04 12:08] Major | Antigravity | Write | src/services/userService.ts, src/store/authStore.ts, src/store/collectionStore.ts, src/store/deckStore.ts - port 2-way cloud reconciliation & write guards
+[2026-11-04 12:11] Major | Antigravity | Bash | Release v1.2.0 - Solo Practice Playmat V3, Gem Zone, Life Card fix, and Firebase Cloud Sync deploy

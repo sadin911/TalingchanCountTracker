@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Plus, Trash2, Edit2, Download, Upload, ShoppingBag, Search, Layers, Heart, Check } from 'lucide-react';
+import { Plus, Trash2, Edit2, Download, Upload, ShoppingBag, Search, Layers, Heart, Check, Swords } from 'lucide-react';
 import { useDeckStore } from '../../store/deckStore.ts';
 import type { TalingchanCard } from '../../types/card.ts';
 import cardDataRaw from '../../data/talingchanCards.json';
@@ -10,10 +10,15 @@ import { exportDeckToText, importDeckFromText } from '../../utils/deckExportImpo
 
 const allCards = cardDataRaw as TalingchanCard[];
 
-export function DeckPage() {
+interface DeckPageProps {
+  onOpenPlaymat?: () => void;
+}
+
+export function DeckPage({ onOpenPlaymat }: DeckPageProps = {}) {
   const decks = useDeckStore((s) => s.decks);
   const activeDeckId = useDeckStore((s) => s.activeDeckId);
   const setActiveDeck = useDeckStore((s) => s.setActiveDeck);
+  const setPendingPlaymatDeck = useDeckStore((s) => s.setPendingPlaymatDeck);
   const createDeck = useDeckStore((s) => s.createDeck);
   const deleteDeck = useDeckStore((s) => s.deleteDeck);
   const renameDeck = useDeckStore((s) => s.renameDeck);
@@ -186,9 +191,22 @@ export function DeckPage() {
           )}
         </div>
 
-        {/* Right: Actions (Check Missing, Export, Import) */}
+        {/* Right: Actions (Playtest, Check Missing, Export, Import) */}
         {activeDeck && (
           <div className="flex items-center gap-2 flex-wrap">
+            {onOpenPlaymat && (
+              <button
+                data-testid="btn-playtest-active-deck"
+                onClick={() => {
+                  setPendingPlaymatDeck(activeDeck.id);
+                  onOpenPlaymat();
+                }}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold text-xs shadow-md shadow-emerald-950/50 transition-all cursor-pointer"
+              >
+                <Swords className="w-3.5 h-3.5" /> ซ้อมเด็คนี้
+              </button>
+            )}
+
             <button
               onClick={() => setShowMissingModal(true)}
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-rose-600/20 hover:bg-rose-600/30 text-rose-300 font-semibold text-xs border border-rose-500/40 transition-colors"

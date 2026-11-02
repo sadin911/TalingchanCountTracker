@@ -1,10 +1,13 @@
-import { BookOpen, Layers, Shield } from 'lucide-react';
+import { BookOpen, Layers, Shield, Swords } from 'lucide-react';
 import { APP_VERSION } from '../../constants/version.ts';
 import { useDeckStore } from '../../store/deckStore.ts';
+import { AccountMenu } from './AccountMenu.tsx';
+
+export type AppTab = 'collection' | 'deck' | 'playmat';
 
 interface NavbarProps {
-  currentTab: 'collection' | 'deck';
-  onTabChange: (tab: 'collection' | 'deck') => void;
+  currentTab: AppTab;
+  onTabChange: (tab: AppTab) => void;
 }
 
 export function Navbar({ currentTab, onTabChange }: NavbarProps) {
@@ -43,7 +46,8 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
           <nav className="hidden md:flex items-center gap-1.5 bg-[#121522] p-1 rounded-2xl border border-slate-800">
             <button
               onClick={() => onTabChange('collection')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              data-testid="nav-tab-collection"
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 currentTab === 'collection'
                   ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
@@ -55,7 +59,8 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
 
             <button
               onClick={() => onTabChange('deck')}
-              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all ${
+              data-testid="nav-tab-deck"
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
                 currentTab === 'deck'
                   ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30'
                   : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
@@ -64,18 +69,31 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
               <Layers className="w-4 h-4" />
               ระบบจัดเด็ค (Deck Builder)
             </button>
+
+            <button
+              onClick={() => onTabChange('playmat')}
+              data-testid="nav-tab-playmat"
+              className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${
+                currentTab === 'playmat'
+                  ? 'bg-rose-600 text-white shadow-md shadow-rose-600/30'
+                  : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/50'
+              }`}
+            >
+              <Swords className="w-4 h-4" />
+              โหมดซ้อม (Playmat)
+            </button>
           </nav>
 
-          {/* Right: Active Deck Status Indicator */}
+          {/* Right: Active Deck Status Indicator + Account Menu */}
           <div className="flex items-center gap-2">
             {activeDeck ? (
               <button
                 onClick={() => onTabChange('deck')}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-[#181c2e] border border-slate-800 text-xs transition-colors"
+                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-[#181c2e] border border-slate-800 text-xs transition-colors cursor-pointer"
                 title="คลิกเพื่อเปิดดูเด็คที่กำลังใช้งาน"
               >
                 <Shield className="w-3.5 h-3.5 text-rose-400" />
-                <span className="font-semibold text-slate-200 max-w-[100px] sm:max-w-[140px] truncate">
+                <span className="font-semibold text-slate-200 max-w-[90px] sm:max-w-[130px] truncate">
                   {activeDeck.name}
                 </span>
                 <span
@@ -91,21 +109,25 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
             ) : (
               <button
                 onClick={() => onTabChange('deck')}
-                className="text-xs px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 transition-colors"
+                className="text-xs px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
               >
                 + สร้างเด็ค
               </button>
             )}
+
+            <AccountMenu />
           </div>
         </div>
       </header>
 
-      {/* Mobile Bottom Navigation Bar (Fixed for mobile thumbs) */}
+      {/* Mobile Bottom Navigation Bar */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#090a0f]/95 backdrop-blur-lg border-t border-slate-800/90 px-4 py-2 flex items-center justify-around shadow-2xl">
         <button
           onClick={() => onTabChange('collection')}
           className={`flex flex-col items-center gap-1 py-1 px-4 rounded-xl transition-all ${
-            currentTab === 'collection' ? 'text-rose-500 font-bold' : 'text-slate-400 hover:text-slate-200'
+            currentTab === 'collection'
+              ? 'text-rose-500 font-bold'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <BookOpen className="w-5 h-5" />
@@ -115,11 +137,25 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
         <button
           onClick={() => onTabChange('deck')}
           className={`flex flex-col items-center gap-1 py-1 px-4 rounded-xl transition-all ${
-            currentTab === 'deck' ? 'text-rose-500 font-bold' : 'text-slate-400 hover:text-slate-200'
+            currentTab === 'deck'
+              ? 'text-rose-500 font-bold'
+              : 'text-slate-400 hover:text-slate-200'
           }`}
         >
           <Layers className="w-5 h-5" />
           <span className="text-[10px]">จัดเด็ค</span>
+        </button>
+
+        <button
+          onClick={() => onTabChange('playmat')}
+          className={`flex flex-col items-center gap-1 py-1 px-4 rounded-xl transition-all ${
+            currentTab === 'playmat'
+              ? 'text-rose-500 font-bold'
+              : 'text-slate-400 hover:text-slate-200'
+          }`}
+        >
+          <Swords className="w-5 h-5" />
+          <span className="text-[10px]">โหมดซ้อม</span>
         </button>
       </div>
     </>

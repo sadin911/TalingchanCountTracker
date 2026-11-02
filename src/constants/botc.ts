@@ -13,6 +13,7 @@ export const CARD_COLORS: CardColor[] = [
 export const CARD_TYPES: CardType[] = [
   'Avatar',
   'Magic',
+  'Construct',
   'Land Magic',
   'Modification',
   'Life Card',
@@ -82,6 +83,7 @@ export const FINISH_META: Record<FinishKey, { label: string; icon: string; badge
 export const TYPE_BADGES: Record<CardType, string> = {
   Avatar: 'bg-rose-950/80 text-rose-300 border-rose-500/40',
   Magic: 'bg-cyan-950/80 text-cyan-300 border-cyan-500/40',
+  Construct: 'bg-orange-950/80 text-orange-300 border-orange-500/40',
   'Land Magic': 'bg-emerald-950/80 text-emerald-300 border-emerald-500/40',
   Modification: 'bg-amber-950/80 text-amber-300 border-amber-500/40',
   'Life Card': 'bg-pink-950/80 text-pink-300 border-pink-500/40',

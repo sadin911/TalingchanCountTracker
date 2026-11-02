@@ -27,3 +27,75 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #334155;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ==========================================================================
+   Playmat V3 Responsive Tabletop Sizing (Single-Screen No-Scroll Arena)
+   ========================================================================== */
+:root {
+  --playmat-avatar-h: clamp(68px, 11.2vh, 112px);
+  --playmat-construct-h: clamp(50px, 8.2vh, 84px);
+  --playmat-magic-h: clamp(50px, 8.2vh, 84px);
+  --playmat-life-w: clamp(76px, 8.5vw, 112px);
+  --playmat-life-h: clamp(24px, 3.3vh, 38px);
+  --playmat-deck-h: clamp(52px, 8.5vh, 86px);
+}
+
+@media (max-width: 768px) {
+  :root {
+    --playmat-avatar-h: clamp(56px, 9.5vh, 88px);
+    --playmat-construct-h: clamp(44px, 7.2vh, 68px);
+    --playmat-magic-h: clamp(44px, 7.2vh, 68px);
+    --playmat-life-w: clamp(62px, 14vw, 88px);
+    --playmat-life-h: clamp(20px, 2.8vh, 32px);
+    --playmat-deck-h: clamp(44px, 7.5vh, 72px);
+  }
+}
+
+.botc-avatar-card {
+  height: var(--playmat-avatar-h);
+  aspect-ratio: 2.5 / 3.5;
+}
+
+.botc-construct-card {
+  height: var(--playmat-construct-h);
+  aspect-ratio: 2.5 / 3.5;
+}
+
+.botc-magic-card {
+  height: var(--playmat-magic-h);
+  aspect-ratio: 2.5 / 3.5;
+}
+
+/* Official BOTC Rulebook: 5 Life Cards placed HORIZONTALLY stacked top-to-bottom */
+.botc-life-card-horizontal {
+  width: var(--playmat-life-w);
+  height: var(--playmat-life-h);
+}
+
+.botc-deck-card {
+  height: var(--playmat-deck-h);
+  aspect-ratio: 2.5 / 3.5;
+}
+
+.playmat-felt-surface {
+  background-color: #0b111e;
+  background-image:
+    radial-gradient(ellipse at 50% 50%, rgba(225, 29, 72, 0.08) 0%, rgba(15, 23, 42, 0.94) 68%, #060911 100%),
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 28px 28px, 28px 28px;
+}
+
+.playmat-zone-box {
+  background: rgba(15, 23, 42, 0.55);
+  border: 1px dashed rgba(148, 163, 184, 0.25);
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.45);
+}

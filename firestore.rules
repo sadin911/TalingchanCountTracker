@@ -1,0 +1,102 @@
+rules_version = '2';
+
+// Battle of Talingchan Count Tracker (botcounttracker) — Firestore security rules.
+// Aligned with PokéCount Tracker production standards.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isAdmin() {
+      return isSignedIn() && request.auth.token.email in ['wingae911@gmail.com'];
+    }
+
+    // ---------------------------------------------------------------------
+    // users/{userId} — user profile document & private subcollections
+    // (collection/main, decks/{deckId}, deleted_decks/{deckId}, binders/{profileId})
+    // ---------------------------------------------------------------------
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      allow write: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+
+      match /{document=**} {
+        allow read, write: if isSignedIn() && (request.auth.uid == userId || isAdmin());
+      }
+    }
+
+    // ---------------------------------------------------------------------
+    // shared_collections/{shareId} — public read-only collection showcases.
+    // ---------------------------------------------------------------------
+    match /shared_collections/{shareId} {
+      allow read: if true;
+
+      allow create: if isSignedIn()
+                    && request.resource.data.ownerUid == request.auth.uid;
+      allow update, delete: if isSignedIn()
+                            && resource.data.ownerUid == request.auth.uid;
+
+      allow update: if request.resource.data
+                      .diff(resource.data)
+                      .affectedKeys()
+                      .hasOnly(['viewCount'])
+                    && request.resource.data.viewCount is int
+                    && request.resource.data.viewCount == resource.data.viewCount + 1;
+    }
+
+    // ---------------------------------------------------------------------
+    // Shared reference data & community stats
+    // ---------------------------------------------------------------------
+    match /market_prices/{cardId} {
+      allow read: if true;
+      allow create: if isAdmin()
+                    || (isSignedIn()
+                        && request.resource.data.keys().hasOnly(['cardId', 'lastSold', 'lastSoldDate', 'recentSales', 'updatedAt']));
+      allow update: if isAdmin()
+                    || (isSignedIn()
+                        && request.resource.data.diff(resource.data)
+                           .affectedKeys()
+                           .hasOnly(['lastSold', 'lastSoldDate', 'recentSales', 'updatedAt']));
+      allow delete: if isAdmin();
+    }
+
+    match /community_stats/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    match /system_config/{docId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ---------------------------------------------------------------------
+    // Digital Playmat rooms & signaling
+    // ---------------------------------------------------------------------
+    match /playmat_rooms/{roomCode} {
+      allow read: if true;
+      allow create: if request.resource.data.keys().hasAll(['roomCode', 'createdAt', 'p1', 'p2'])
+                    && request.resource.data.roomCode == roomCode
+                    && request.resource.data.createdAt is int;
+      allow update: if request.resource.data.roomCode == roomCode
+                    && (!('createdAt' in resource.data) || request.resource.data.createdAt == resource.data.createdAt)
+                    && (!('hostUid' in resource.data) || request.resource.data.hostUid == resource.data.hostUid)
+                    && (
+                      (request.auth != null && 'participants' in resource.data && (request.auth.uid in resource.data.participants || ('hostUid' in resource.data && request.auth.uid == resource.data.hostUid)))
+                      || (request.auth != null && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['participants', 'p1', 'p2', 'updatedAt', 'serverUpdatedAt', 'recentActionText']))
+                      || (!('participants' in resource.data))
+                    );
+      allow delete: if isAdmin() || (isSignedIn() && 'hostUid' in resource.data && request.auth.uid == resource.data.hostUid);
+    }
+
+    match /v3_tabletop_rooms/{roomCode} {
+      allow read, write: if true;
+    }
+
+    match /playmat_signals/{roomCode} {
+      allow read, write: if true;
+    }
+  }
+}

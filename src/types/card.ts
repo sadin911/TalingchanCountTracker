@@ -1,6 +1,7 @@
 export type CardType = 
   | 'Avatar'
   | 'Magic'
+  | 'Construct'
   | 'Land Magic'
   | 'Modification'
   | 'Life Card'
