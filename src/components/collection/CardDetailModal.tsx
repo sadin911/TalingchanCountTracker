@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { X, Layers, Heart, Sparkles, AlertTriangle } from 'lucide-react';
+import { X, Layers, Heart, Sparkles, AlertTriangle, Laugh, Quote } from 'lucide-react';
 import type { TalingchanCard } from '../../types/card.ts';
 import { rarityLabel } from '../../types/card.ts';
 import { COLOR_STYLES, TYPE_BADGES } from '../../constants/botc.ts';
@@ -123,6 +123,13 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
             </div>
           )}
 
+          {card.isCollab && (
+            <div className="flex items-center gap-2 bg-fuchsia-950/40 border border-fuchsia-500/40 p-2.5 rounded-xl text-fuchsia-300 text-xs">
+              <Sparkles className="w-4 h-4 shrink-0" />
+              <span>การ์ดสัญลักษณ์ <strong>โดนใจ</strong> — การ์ดคอลแลบส์พิเศษกับครีเอเตอร์และมีมดัง</span>
+            </div>
+          )}
+
           {/* Card Effect Text */}
           <div className="bg-[#181c2e] p-3.5 rounded-xl border border-slate-800 space-y-1">
             <div className="text-xs font-semibold text-slate-300">ความสามารถการ์ด (Effect):</div>
@@ -130,6 +137,35 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
               {card.effect || 'ไม่มีคำอธิบายความสามารถพิเศษ'}
             </p>
           </div>
+
+          {/* Meme / Parody / Lore Explanation */}
+          {card.memeLore && (
+            <div
+              data-testid="card-detail-meme-lore"
+              className="bg-gradient-to-br from-amber-950/45 via-[#1b192b] to-rose-950/35 p-3.5 rounded-xl border border-amber-500/35 space-y-1.5"
+            >
+              <div className="flex items-center gap-1.5 text-xs font-bold text-amber-300">
+                <Laugh className="w-4 h-4 shrink-0 text-amber-400" />
+                <span>ที่มามีม / ล้อเลียนอะไร & เกร็ดการ์ด:</span>
+              </div>
+              <p className="text-xs text-amber-100/90 leading-relaxed font-['Prompt'] whitespace-pre-wrap">
+                {card.memeLore}
+              </p>
+            </div>
+          )}
+
+          {/* Flavor Quote Box */}
+          {card.flavorText && card.flavorText !== card.effect && (
+            <div
+              data-testid="card-detail-flavor-text"
+              className="bg-slate-900/75 p-3 rounded-xl border border-slate-700/70 flex items-start gap-2.5"
+            >
+              <Quote className="w-4 h-4 shrink-0 text-rose-400 mt-0.5" />
+              <p className="text-xs italic text-slate-300 leading-relaxed font-['Prompt'] whitespace-pre-wrap">
+                {card.flavorText}
+              </p>
+            </div>
+          )}
 
           {/* Collection Status */}
           <div className="flex items-center justify-between bg-slate-900/60 p-3 rounded-xl border border-slate-800 text-xs">

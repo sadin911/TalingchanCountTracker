@@ -44,6 +44,8 @@ describe('Card Image Resolver & Official BotTCG Catalog Integrity', () => {
       expect(card.name).not.toContain('colspan=');
       expect(card.name).not.toContain('rowspan=');
       expect(resolveCardImageUrl(card)).toContain(`${R2_CDN_BASE}/card-images/`);
+      expect(card.memeLore).toBeTruthy();
+      expect(card.memeLore!.length).toBeGreaterThan(10);
     }
   });
 });

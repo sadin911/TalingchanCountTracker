@@ -45,6 +45,8 @@ export interface TalingchanCard {
   isCollab: boolean;        // สัญลักษณ์ โดนใจ
   illustrator: string;
   effect: string;
+  memeLore?: string;        // คำอธิบายที่มามีม / ล้อเลียนอะไร / เกร็ดความรู้
+  flavorText?: string;      // คำโปรยสุดกวนบนการ์ด
   rarityVariants: string[];
   finishes: FinishKey[];
   imageUrl?: string;

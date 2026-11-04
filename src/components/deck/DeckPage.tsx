@@ -77,7 +77,8 @@ export function DeckPage({ onOpenPlaymat }: DeckPageProps = {}) {
           (c) =>
             c.name.toLowerCase().includes(cardSearchQuery.toLowerCase()) ||
             c.id.toLowerCase().includes(cardSearchQuery.toLowerCase()) ||
-            c.symbol.toLowerCase().includes(cardSearchQuery.toLowerCase())
+            c.symbol.toLowerCase().includes(cardSearchQuery.toLowerCase()) ||
+            (c.memeLore && c.memeLore.toLowerCase().includes(cardSearchQuery.toLowerCase()))
         )
         .slice(0, 10)
     : [];

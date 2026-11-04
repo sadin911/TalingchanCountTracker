@@ -18,12 +18,18 @@ test.describe('Collection Tracker E2E', () => {
     // Click on the card to open CardDetailModal
     await page.getByText('นนทก นิ้วเพชร').first().click();
 
-    // Verify modal content
+    // Verify modal content & Meme / Parody Lore
     await expect(page.getByText('ความสามารถการ์ด (Effect):')).toBeVisible();
     await expect(page.getByText('เมื่อการ์ดใบนี้ประกาศโจมตี Avatar')).toBeVisible();
+    await expect(page.getByTestId('card-detail-meme-lore')).toBeVisible();
+    await expect(page.getByTestId('card-detail-meme-lore')).toContainText('รามเกียรติ์');
 
     // Press Escape to close modal
     await page.keyboard.press('Escape');
     await expect(page.getByText('ความสามารถการ์ด (Effect):')).not.toBeVisible();
+
+    // Verify searching by parody / meme keyword works
+    await searchInput.fill('โหนกระแส');
+    await expect(page.getByText('พี่หน่วง พิธีกรผมสวย').first()).toBeVisible();
   });
 });

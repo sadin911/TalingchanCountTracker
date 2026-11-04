@@ -30,7 +30,9 @@ export function CollectionPage() {
           c.name.toLowerCase().includes(q) ||
           c.id.toLowerCase().includes(q) ||
           c.effect.toLowerCase().includes(q) ||
-          c.symbol.toLowerCase().includes(q)
+          c.symbol.toLowerCase().includes(q) ||
+          (c.memeLore && c.memeLore.toLowerCase().includes(q)) ||
+          (c.flavorText && c.flavorText.toLowerCase().includes(q))
       );
     }
 

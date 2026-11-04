@@ -90,6 +90,11 @@ export function CostPaymentModal({
                   {card.effect}
                 </p>
               )}
+              {card.memeLore && (
+                <p className="text-[11px] text-amber-300/90 mt-1.5 bg-amber-950/30 border border-amber-500/30 rounded-lg px-2.5 py-1 line-clamp-2 leading-relaxed">
+                  🎭 <strong>ที่มามีม:</strong> {card.memeLore}
+                </p>
+              )}
             </div>
           </div>
 

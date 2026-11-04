@@ -40,7 +40,7 @@ export function FilterBar({
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
-            placeholder="ค้นหาชื่อการ์ด, รหัส (BT01-001), ความสามารถ..."
+            placeholder="ค้นหาชื่อการ์ด, รหัส (BT01-001), ที่มามีม/ล้อเลียน, ความสามารถ..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
             className="w-full bg-[#1a1f33] border border-slate-700/60 rounded-xl pl-9 pr-9 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-500/80 focus:ring-1 focus:ring-rose-500/50 transition-all"
