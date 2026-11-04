@@ -53,7 +53,7 @@ export interface TalingchanCard {
 export interface TalingchanSet {
   code: string;
   name: string;
-  type: 'Booster' | 'Starter';
+  type: 'Booster' | 'Starter' | 'Special';
   releasedAt: string | null;
   cardCount: number;
 }

@@ -12,8 +12,7 @@ export function cardImageKey(setCode: string, collectorNumber: string, large = f
 
 /**
  * Resolves a card image path to its best URL.
- * - In Production (Cloudflare Pages/Web): routes directly to Cloudflare R2 CDN.
- * - In Local Dev: uses local asset path (/card-images/...) for instant offline loading.
+ * Primary source: Cloudflare R2 CDN (`https://pub-851c7b1da9514507a99b79bc2fd47577.r2.dev`).
  */
 export function resolveCardImageUrl(
   cardOrSetCode?: string | Partial<Pick<TalingchanCard, 'id' | 'setCode' | 'collectorNumber' | 'imageUrl'>> | null,
@@ -40,11 +39,7 @@ export function resolveCardImageUrl(
 
   if (setCode && collectorNumber) {
     const key = cardImageKey(setCode, collectorNumber, large);
-    // In Production, resolve directly to Cloudflare R2 CDN
-    if (import.meta.env.PROD) {
-      return `${R2_CDN_BASE}/${key}`;
-    }
-    return `/${key}`;
+    return `${R2_CDN_BASE}/${key}`;
   }
 
   if (remoteUrl) {
@@ -67,22 +62,35 @@ export function handleCardImageError(
     return;
   }
 
-  // 1. Try Cloudflare R2 CDN if local failed
+  // 1. Try Cloudflare R2 CDN if not already tried
   if (card?.setCode && card?.collectorNumber) {
     const r2Url = `${R2_CDN_BASE}/${cardImageKey(card.setCode, card.collectorNumber)}`;
-    if (target.src !== r2Url) {
+    if (target.src !== r2Url && !target.dataset.triedR2) {
+      target.dataset.triedR2 = '1';
       target.src = r2Url;
       return;
     }
   }
 
-  // 2. Try Wiki fallback if available
-  if (fallbackUrl && target.src !== fallbackUrl && !target.src.includes('card-placeholder.svg')) {
+  // 2. Try local / Worker static asset path (/card-images/...) if R2 returned 429/error
+  if (card?.setCode && card?.collectorNumber && !target.dataset.triedLocal) {
+    target.dataset.triedLocal = '1';
+    target.src = `/${cardImageKey(card.setCode, card.collectorNumber)}`;
+    return;
+  }
+
+  // 3. Try Official BotTCG CDN fallback URL if available
+  if (
+    fallbackUrl &&
+    target.src !== fallbackUrl &&
+    !target.dataset.triedFallback &&
+    !target.src.includes('card-placeholder.svg')
+  ) {
+    target.dataset.triedFallback = '1';
     target.src = fallbackUrl;
     return;
   }
 
-  // 3. Final fallback to placeholder SVG
+  // 4. Final fallback to placeholder SVG
   target.src = DEFAULT_CARD_PLACEHOLDER;
 }
-

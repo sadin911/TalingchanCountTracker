@@ -36,7 +36,7 @@ export function CardTile({ card, onSelectCard }: CardTileProps) {
         <img
           src={resolveCardImageUrl(card, false)}
           alt={card.name}
-          onError={(e) => handleCardImageError(e, card.imageUrl)}
+          onError={(e) => handleCardImageError(e, card.imageUrl, card)}
           loading="lazy"
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
         />
