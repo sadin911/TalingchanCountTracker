@@ -65,3 +65,5 @@
 [2026-11-04 16:25] Major | Antigravity | Write | scripts/enrich_meme_lore.py, src/data/talingchanCards.json - enrich all 1,851 cards with memeLore & flavorText
 [2026-11-04 16:25] Major | Antigravity | Edit | src/components/collection/CardDetailModal.tsx, CollectionPage.tsx, Playmat - display & search meme/parody lore
 [2026-11-04 16:25] Major | Antigravity | Release | v1.4.0 - Meme/Parody Lore & Flavor Text for all 1,851 cards
+[2026-11-05 17:12] Major | Antigravity | Write | src/data/cardSpecificLore.json, src/data/talingchanCards.json - 1,083 distinct per-card deep meme/parody/effect explanations
+[2026-11-05 17:12] Major | Antigravity | Release | v1.5.0 - Individual deep card-by-card meme & parody explanations for all 1,851 cards

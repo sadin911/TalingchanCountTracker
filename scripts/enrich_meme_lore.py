@@ -13,6 +13,7 @@ import urllib.request
 
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARDS_JSON_PATH = os.path.join(ROOT_DIR, "src/data/talingchanCards.json")
+CARD_SPECIFIC_LORE_PATH = os.path.join(ROOT_DIR, "src/data/cardSpecificLore.json")
 WIKI_DUMP_PATH = "/Users/sadin/.gemini/antigravity/brain/85d8f6fa-7692-4122-a9c5-c239bfbbc74d/scratch/wiki_dump.json"
 OFFICIAL_CARDS_URL = "https://cdn.bottcg.com/data/cards.2a2b9f7e.json"
 FANDOM_API_URL = "https://battle-of-talingchan.fandom.com/th/api.php"
@@ -435,6 +436,11 @@ def build_card_lore():
     with open(CARDS_JSON_PATH, "r", encoding="utf-8") as f:
         cards = json.load(f)
 
+    card_specific_lore: dict[str, str] = {}
+    if os.path.exists(CARD_SPECIFIC_LORE_PATH):
+        with open(CARD_SPECIFIC_LORE_PATH, "r", encoding="utf-8") as f:
+            card_specific_lore = json.load(f)
+
     wiki = load_or_fetch_wiki_dump()
 
     # Fetch official cards JSON for favorText & hashtagText
@@ -509,12 +515,15 @@ def build_card_lore():
         ]
         decks = [cat.replace(" (Deck)", "").replace("_(Deck)", "") for cat in wiki_cats if "(Deck)" in cat and cat not in ("PASULOL (Deck)", "ประวัติศาสตร์ (Deck)", "วรรณคดีไทย (Deck)")]
 
-        # 4. Match Specific Parody Rule
+        # 4. Match Card-Specific Deep Lore first, then Specific Parody Rule
         parody_parts = []
-        for matcher, explanation in SPECIFIC_PARODY_RULES:
-            if matcher(norm_name, c):
-                parody_parts.append(explanation)
-                break
+        if norm_name in card_specific_lore:
+            parody_parts.append(card_specific_lore[norm_name])
+        else:
+            for matcher, explanation in SPECIFIC_PARODY_RULES:
+                if matcher(norm_name, c):
+                    parody_parts.append(explanation)
+                    break
 
         # 5. Add Deck Lore if no specific rule matched or as supplementary context
         for cat in wiki_cats:

@@ -7,6 +7,7 @@ import {
 } from './cardImage.ts';
 import cardsData from '../data/talingchanCards.json';
 import setsData from '../data/talingchanSets.json';
+import cardSpecificLore from '../data/cardSpecificLore.json';
 
 describe('Card Image Resolver & Official BotTCG Catalog Integrity', () => {
   it('derives image key correctly', () => {
@@ -45,7 +46,12 @@ describe('Card Image Resolver & Official BotTCG Catalog Integrity', () => {
       expect(card.name).not.toContain('rowspan=');
       expect(resolveCardImageUrl(card)).toContain(`${R2_CDN_BASE}/card-images/`);
       expect(card.memeLore).toBeTruthy();
-      expect(card.memeLore!.length).toBeGreaterThan(10);
+      expect(card.memeLore!.length).toBeGreaterThan(80);
     }
+
+    // Verify 100% distinct per-card deep lore across all 1,083 unique card names
+    const loreValues = Object.values(cardSpecificLore);
+    expect(loreValues.length).toBe(1083);
+    expect(new Set(loreValues).size).toBe(1083);
   });
 });
