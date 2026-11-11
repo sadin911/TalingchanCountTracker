@@ -77,6 +77,13 @@
     "cardCount": 97
   },
   {
+    "code": "BT12",
+    "name": "ทำไงดี ??!! เกิดใหม่ทั้งทีก็ต้องมานั่งเล่นการ์ดท่ามกลางคนไม่ปกติในตลิ่งชันซะแล้ว",
+    "type": "Booster",
+    "releasedAt": "2026-11-13",
+    "cardCount": 98
+  },
+  {
     "code": "SD01",
     "name": "ตัวตึงไกรลาส",
     "type": "Starter",
@@ -217,11 +224,32 @@
     "cardCount": 10
   },
   {
+    "code": "B2SA",
+    "name": "สมรภูมิ Passion",
+    "type": "Special",
+    "releasedAt": "2026-10-31",
+    "cardCount": 40
+  },
+  {
+    "code": "B2SB",
+    "name": "มินิไกรลาส",
+    "type": "Special",
+    "releasedAt": "2026-10-31",
+    "cardCount": 14
+  },
+  {
     "code": "PRMO",
     "name": "การ์ดโปรโม (Promo)",
     "type": "Special",
     "releasedAt": "2024-01-01",
-    "cardCount": 145
+    "cardCount": 154
+  },
+  {
+    "code": "STOR",
+    "name": "การ์ดโปรโมร้านค้า (Store Promo)",
+    "type": "Special",
+    "releasedAt": "2026-10-31",
+    "cardCount": 1
   },
   {
     "code": "FPRO",
@@ -242,6 +270,6 @@
     "name": "April Fools' Day (APFD)",
     "type": "Special",
     "releasedAt": "2025-04-01",
-    "cardCount": 1
+    "cardCount": 2
   }
 ]

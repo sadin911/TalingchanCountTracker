@@ -20,19 +20,19 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
   return (
     <>
       {/* Top Navbar (Desktop & Tablet) */}
-      <header className="sticky top-0 z-40 bg-[#090a0f]/90 backdrop-blur-md border-b border-slate-800/80">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-40 w-full max-w-full bg-[#090a0f]/90 backdrop-blur-md border-b border-slate-800/80">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between gap-2 sm:gap-4 min-w-0">
           {/* Logo & Branding */}
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-rose-700 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-950/40 text-white font-extrabold text-sm font-['Kanit']">
+          <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+            <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-rose-700 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-950/40 text-white font-extrabold text-xs sm:text-sm font-['Kanit'] shrink-0">
               BOTC
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-base text-slate-100 font-['Kanit'] tracking-wide">
+            <div className="min-w-0">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-extrabold text-sm sm:text-base text-slate-100 font-['Kanit'] tracking-wide truncate">
                   Talingchan <span className="text-rose-500 font-medium">Count</span>
                 </span>
-                <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono">
+                <span className="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400 font-mono shrink-0">
                   v{APP_VERSION}
                 </span>
               </div>
@@ -85,19 +85,19 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
           </nav>
 
           {/* Right: Active Deck Status Indicator + Account Menu */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
             {activeDeck ? (
               <button
                 onClick={() => onTabChange('deck')}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-[#181c2e] border border-slate-800 text-xs transition-colors cursor-pointer"
+                className="flex items-center gap-1.5 sm:gap-2 px-2 sm:px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-[#181c2e] border border-slate-800 text-xs transition-colors cursor-pointer"
                 title="คลิกเพื่อเปิดดูเด็คที่กำลังใช้งาน"
               >
-                <Shield className="w-3.5 h-3.5 text-rose-400" />
-                <span className="font-semibold text-slate-200 max-w-[90px] sm:max-w-[130px] truncate">
+                <Shield className="w-3.5 h-3.5 text-rose-400 shrink-0" />
+                <span className="font-semibold text-slate-200 max-w-[70px] sm:max-w-[130px] truncate hidden xs:inline sm:inline">
                   {activeDeck.name}
                 </span>
                 <span
-                  className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold ${
+                  className={`text-[10px] px-1.5 py-0.5 rounded font-mono font-bold shrink-0 ${
                     mainCount === 50 && lifeCount === 5
                       ? 'bg-emerald-950/80 text-emerald-400'
                       : 'bg-amber-950/80 text-amber-300'
@@ -109,7 +109,7 @@ export function Navbar({ currentTab, onTabChange }: NavbarProps) {
             ) : (
               <button
                 onClick={() => onTabChange('deck')}
-                className="text-xs px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
+                className="text-xs px-2.5 sm:px-3 py-1.5 rounded-xl bg-[#121522] hover:bg-slate-800 border border-slate-800 text-slate-400 hover:text-slate-200 transition-colors cursor-pointer"
               >
                 + สร้างเด็ค
               </button>

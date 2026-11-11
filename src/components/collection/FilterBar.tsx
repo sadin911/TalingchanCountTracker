@@ -32,18 +32,18 @@ export function FilterBar({
   totalVisible,
 }: FilterBarProps) {
   return (
-    <div className="bg-[#121522]/90 backdrop-blur-md border border-slate-800/80 rounded-2xl p-4 shadow-xl space-y-3">
+    <div className="bg-[#121522]/90 backdrop-blur-md border border-slate-800/80 rounded-2xl p-3 sm:p-4 shadow-xl space-y-3 w-full max-w-full overflow-hidden">
       {/* Top row: Search input + Set Selector + Sort */}
-      <div className="flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center">
+      <div className="flex flex-col sm:flex-row gap-2.5 items-stretch sm:items-center w-full min-w-0">
         {/* Search */}
-        <div className="relative flex-1">
+        <div className="relative flex-1 min-w-0">
           <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none" />
           <input
             type="text"
             placeholder="ค้นหาชื่อการ์ด, รหัส (BT01-001), ที่มามีม/ล้อเลียน, ความสามารถ..."
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            className="w-full bg-[#1a1f33] border border-slate-700/60 rounded-xl pl-9 pr-9 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-500/80 focus:ring-1 focus:ring-rose-500/50 transition-all"
+            className="w-full min-w-0 bg-[#1a1f33] border border-slate-700/60 rounded-xl pl-9 pr-9 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:border-rose-500/80 focus:ring-1 focus:ring-rose-500/50 transition-all"
           />
           {searchQuery && (
             <button
@@ -55,12 +55,12 @@ export function FilterBar({
           )}
         </div>
 
-        {/* Set Selector */}
-        <div className="flex gap-2">
+        {/* Set Selector & Sort Selector */}
+        <div className="grid grid-cols-1 sm:flex gap-2 w-full sm:w-auto min-w-0">
           <select
             value={selectedSet}
             onChange={(e) => onSetChange(e.target.value)}
-            className="bg-[#1a1f33] border border-slate-700/60 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-rose-500/80 cursor-pointer"
+            className="w-full sm:w-64 min-w-0 max-w-full truncate bg-[#1a1f33] border border-slate-700/60 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-rose-500/80 cursor-pointer"
           >
             <option value="ALL">ทุกชุดการ์ด ({sets.length} ชุด)</option>
             {sets.map((s) => (
@@ -74,7 +74,7 @@ export function FilterBar({
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value as 'number' | 'cost' | 'power' | 'name')}
-            className="bg-[#1a1f33] border border-slate-700/60 rounded-xl px-3 py-2 text-sm text-slate-200 focus:outline-none focus:border-rose-500/80 cursor-pointer"
+            className="w-full sm:w-44 min-w-0 max-w-full truncate bg-[#1a1f33] border border-slate-700/60 rounded-xl px-3 py-2 text-xs sm:text-sm text-slate-200 focus:outline-none focus:border-rose-500/80 cursor-pointer"
           >
             <option value="number">เรียงตามรหัสการ์ด</option>
             <option value="cost">เรียงตามค่าร่าย (Cost)</option>

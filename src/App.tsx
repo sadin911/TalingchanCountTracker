@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Navbar, type AppTab } from './components/layout/Navbar.tsx';
 import { CollectionPage } from './components/collection/CollectionPage.tsx';
 import { DeckPage } from './components/deck/DeckPage.tsx';
@@ -8,19 +8,27 @@ import { APP_VERSION } from './constants/version.ts';
 export default function App() {
   const [currentTab, setCurrentTab] = useState<AppTab>('collection');
 
+  useEffect(() => {
+    document.documentElement.dataset.gameMode = currentTab;
+  }, [currentTab]);
+
   return (
-    <div className="min-h-screen bg-[#090a0f] text-slate-100 flex flex-col font-['Prompt',sans-serif]">
+    <div
+      className={`w-full max-w-full overflow-x-hidden bg-[#090a0f] text-slate-100 flex flex-col font-['Prompt',sans-serif] ${
+        currentTab === 'playmat' ? 'h-dvh overflow-hidden pb-14 md:pb-0' : 'min-h-screen'
+      }`}
+    >
       {/* Top Navbar & Mobile Bottom Bar */}
       <Navbar currentTab={currentTab} onTabChange={setCurrentTab} />
 
       {/* Main Content Area */}
       {currentTab === 'playmat' ? (
-        <main className="flex-1 w-full h-[calc(100dvh-4rem)] overflow-hidden flex flex-col">
+        <main className="flex-1 min-h-0 w-full max-w-full overflow-hidden flex flex-col">
           <PlaymatPage />
         </main>
       ) : (
         <>
-          <main className="flex-1 max-w-7xl w-full mx-auto px-4 py-4 pb-20 md:pb-8">
+          <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-4 py-4 pb-20 md:pb-8 overflow-x-hidden">
             {currentTab === 'collection' ? (
               <CollectionPage />
             ) : (

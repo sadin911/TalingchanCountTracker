@@ -77,3 +77,40 @@ Whenever verifying frontend features, bug fixes, or user flows:
 
 Whenever displaying text in user-facing UI:
 - All card names, effects, mechanics, colors, and game rules must be displayed primarily in Thai.
+
+---
+
+## 6. Two-Track Architecture: Headless Logic Separation & Contract Lock (CRITICAL)
+
+To prevent UI/styling changes from breaking business logic (and to stop AI agents from hallucinating completion), all work in this repository MUST follow these 4 rules:
+
+### 6.1 Strict Separation of "Brain (Headless Logic)" vs. "Face (UI View)"
+1. **Brain Layer (`src/store/`, `src/utils/`, `src/services/`, `src/types/`, `src/data/`):**
+   - All game rules (50-card Main Deck, 5 unique LIFE cards, Cost payment to Hell Zone, Combat power math), state mutations, filtering, and Firebase sync MUST live here.
+   - Every new rule or helper MUST have a corresponding unit test (`*.test.ts`) verified via `npm test`.
+2. **View Layer (`src/components/**/*.tsx`, `src/index.css`):**
+   - React components are strictly for rendering state from Zustand stores and dispatching actions.
+   - **FORBIDDEN in `.tsx` files:** Complex deck validation math, raw Firestore queries, or inline data transformations that belong in `src/store/` or `src/utils/`.
+
+### 6.2 Semantic Contract Lock (`data-testid` Preservation)
+- Interactive elements tested by E2E suites carry explicit `data-testid` attributes (e.g., `btn-account-menu`, `nav-tab-playmat`, `life-count-player1`, `avatar-slot-player1-0`, `cost-payment-modal`, `combat-target-modal`, `card-detail-meme-lore`).
+- **RULE:** When redesigning layouts, changing Tailwind classes, or refactoring components, you **MUST NEVER remove, rename, or break existing `data-testid` attributes**.
+
+### 6.3 Scope Lock During UI / Styling Passes (`npm run scope:ui`)
+- When the user asks to **restyle, polish UI, adjust layout, or fix responsive design**:
+  1. You may ONLY edit `src/components/**/*.tsx` and `src/index.css`.
+  2. You MUST NOT touch `src/store/`, `src/utils/`, `src/services/`, `src/types/`, `src/data/`, or any test files (`e2e/`, `*.test.ts`).
+  3. Run `npm run scope:ui` (`node scripts/verify-scope.mjs ui-only`) to prove zero logic/test files were touched.
+
+### 6.4 Independent Judge & 4-Layer Gate (`npm run gate`)
+- **Builder vs. Judge Separation:** When fixing a bug or implementing a feature, **NEVER weaken, delete, or skip assertions in `e2e/*.spec.ts` or `src/**/*.test.ts`** just to make tests pass (`npm run scope:builder`).
+- Before claiming any task is complete, you MUST run the full 4-Layer Gate:
+  ```bash
+  npm run gate
+  ```
+  which executes:
+  1. `npm run lint` (`oxlint` — 0 warnings/errors)
+  2. `npm run build` (`tsc -b && vite build` — strict TypeScript + bundle check)
+  3. `npm test` (`vitest run` — unit tests for store, deck validator, tabletop helper)
+  4. `npx playwright test` (E2E functional flows + `e2e/ui-guard.spec.ts` checking 0 console errors, 0 horizontal overflow, and font legibility >= 9px across all tabs)
+

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-Enrich all 1,851 Battle of Talingchan cards in src/data/talingchanCards.json with:
-- memeLore: คำอธิบายที่มามีม / ล้อเลียนอะไร / ตอนในการ์ตูน PASULOL / เกร็ดความรู้จาก Wiki
+Enrich all 2,014 Battle of Talingchan cards in src/data/talingchanCards.json with:
+- memeLore: คำอธิบายที่มามีม / ต้นแบบล้อเลียนใครในโลกจริง / เจาะลึกมุกมีม / ตอนในการ์ตูน PASULOL / เกร็ดความรู้จาก Wiki
 - flavorText: คำโปรยสุดกวนจากการ์ดทางการ (เช่น คำคมบนการ์ด Life Card)
 """
 
@@ -14,8 +14,8 @@ import urllib.request
 ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CARDS_JSON_PATH = os.path.join(ROOT_DIR, "src/data/talingchanCards.json")
 CARD_SPECIFIC_LORE_PATH = os.path.join(ROOT_DIR, "src/data/cardSpecificLore.json")
-WIKI_DUMP_PATH = "/Users/sadin/.gemini/antigravity/brain/85d8f6fa-7692-4122-a9c5-c239bfbbc74d/scratch/wiki_dump.json"
-OFFICIAL_CARDS_URL = "https://cdn.bottcg.com/data/cards.2a2b9f7e.json"
+WIKI_DUMP_PATH = r"C:\Users\User\.gemini\antigravity\brain\b35cb76e-90eb-4e25-af7f-b26b5eea0713\scratch\wiki_dump.json"
+OFFICIAL_CARDS_URL = "https://cdn.bottcg.com/data/cards.feab7649.json"
 FANDOM_API_URL = "https://battle-of-talingchan.fandom.com/th/api.php"
 
 
@@ -477,7 +477,7 @@ def build_card_lore():
     for c in cards:
         c.pop("flavorText", None)
         cid = c["id"]
-        base_id = re.sub(r"-(SCR|CBR|PR)$", "", cid)
+        base_id = re.sub(r"-(SCR|CBR|PR|SR|UR|R|C)$", "", cid)
         name = c["name"].strip()
         norm_name = re.sub(r"\s+", " ", name).strip()
 
@@ -502,9 +502,14 @@ def build_card_lore():
         if wiki_entry:
             w_title, w_raw = wiki_entry
             wiki_cats = [cat.strip() for cat in re.findall(r"\[\[หมวดหมู่:([^\]|]+)", w_raw)]
-            m_triv = re.search(r"==\s*เกร็ดความรู้\s*==(.*?)(?:==|\[\[หมวดหมู่:|$)", w_raw, flags=re.DOTALL)
-            if m_triv:
-                card_trivia = clean_wikitext(m_triv.group(1))
+            triv_chunks = []
+            for sec_name in ("เกร็ดความรู้", "เบื้องหลัง"):
+                m_sec = re.search(rf"==\s*{sec_name}\s*==(.*?)(?:==|\[\[หมวดหมู่:|$)", w_raw, flags=re.DOTALL)
+                if m_sec:
+                    cleaned_sec = clean_wikitext(m_sec.group(1))
+                    if cleaned_sec and cleaned_sec not in triv_chunks:
+                        triv_chunks.append(cleaned_sec)
+            card_trivia = " ".join(triv_chunks).strip()
             card_quote = extract_quote_from_wikitext(w_raw)
 
         # 3. Determine Episode / Deck tags from Wiki categories

@@ -23,12 +23,16 @@ HEADERS = {
     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36"
 }
 
-CARD_DB_URL = "https://cdn.bottcg.com/data/cards.2a2b9f7e.json"
+CARD_DB_URL = "https://cdn.bottcg.com/data/cards.feab7649.json"
 CDN_CARDS_BASE = "https://cdn.bottcg.com/cards"
 SPECIAL_RARITIES = {"SCR", "PR", "CBR"}
+RARITY_SUFFIX_SETS = {"B2SA", "B2SB"}
 FOLDER_MAP = {
     "SD09": "123v1k1",
     "RM01": "0aslabe",
+    "BT12": "thankyoupnes",
+    "B2SA": "thankyoupnes",
+    "B2SB": "thankyoupnes",
 }
 
 SET_METADATA = [
@@ -44,6 +48,7 @@ SET_METADATA = [
     {"code": "BT09", "name": "มิตรภาพและสายฟ้า", "type": "Booster", "releasedAt": "2025-05-30"},
     {"code": "BT10", "name": "อันธการไร้นาม", "type": "Booster", "releasedAt": "2025-07-25"},
     {"code": "BT11", "name": "Journey to นคร Z", "type": "Booster", "releasedAt": "2025-09-26"},
+    {"code": "BT12", "name": "ทำไงดี ??!! เกิดใหม่ทั้งทีก็ต้องมานั่งเล่นการ์ดท่ามกลางคนไม่ปกติในตลิ่งชันซะแล้ว", "type": "Booster", "releasedAt": "2026-11-13"},
     # Starter Decks
     {"code": "SD01", "name": "ตัวตึงไกรลาส", "type": "Starter", "releasedAt": "2023-12-15"},
     {"code": "SD02", "name": "วีรบุรุษปากซอย", "type": "Starter", "releasedAt": "2023-12-15"},
@@ -66,7 +71,10 @@ SET_METADATA = [
     {"code": "RM01", "name": "Remix 01", "type": "Special", "releasedAt": "2024-12-06"},
     {"code": "SL01", "name": "Selection 01", "type": "Special", "releasedAt": "2024-10-11"},
     {"code": "SL02", "name": "Selection 02", "type": "Special", "releasedAt": "2025-02-14"},
+    {"code": "B2SA", "name": "สมรภูมิ Passion", "type": "Special", "releasedAt": "2026-10-31"},
+    {"code": "B2SB", "name": "มินิไกรลาส", "type": "Special", "releasedAt": "2026-10-31"},
     {"code": "PRMO", "name": "การ์ดโปรโม (Promo)", "type": "Special", "releasedAt": "2024-01-01"},
+    {"code": "STOR", "name": "การ์ดโปรโมร้านค้า (Store Promo)", "type": "Special", "releasedAt": "2026-10-31"},
     {"code": "FPRO", "name": "Festival Promo", "type": "Special", "releasedAt": "2024-10-01"},
     {"code": "PRE0", "name": "Pre-Release / Demo (PRE0)", "type": "Special", "releasedAt": "2023-11-01"},
     {"code": "APFD", "name": "April Fools' Day (APFD)", "type": "Special", "releasedAt": "2025-04-01"},
@@ -79,7 +87,7 @@ def get_bottcg_image_url(print_code: str, rare: str) -> str:
     set_code = print_code.split("-")[0]
     folder = FOLDER_MAP.get(set_code, "")
     base = f"{CDN_CARDS_BASE}/{folder}" if folder else CDN_CARDS_BASE
-    filename = f"{print_code}-{rare}" if rare in SPECIAL_RARITIES else print_code
+    filename = f"{print_code}-{rare}" if (rare in SPECIAL_RARITIES or set_code in RARITY_SUFFIX_SETS) else print_code
     return f"{base}/{filename}.png"
 
 
@@ -202,7 +210,9 @@ def main():
         p = c["print"]
         rare = c.get("rare", "C")
         set_code, rest_num = p.split("-", 1)
-        is_alt_art = print_counts[p] > 1 and rare in SPECIAL_RARITIES
+        is_alt_art = print_counts[p] > 1 and (
+            rare in SPECIAL_RARITIES or set_code in RARITY_SUFFIX_SETS
+        )
 
         card_id = f"{p}-{rare}" if is_alt_art else p
         collector_number = f"{rest_num}-{rare}" if is_alt_art else rest_num
@@ -231,7 +241,7 @@ def main():
             power = int(c["power"]) if "power" in c and c["power"] is not None else 0
 
         # Finishes
-        if is_alt_art or rare in ("SCR", "USEC"):
+        if rare in ("SCR", "USEC") or (is_alt_art and set_code not in RARITY_SUFFIX_SETS):
             finishes = ["normal", "foil", "secret"]
         elif rare in ("SR", "UR", "PR", "CBR"):
             finishes = ["normal", "foil"]

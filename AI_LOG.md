@@ -67,3 +67,11 @@
 [2026-11-04 16:25] Major | Antigravity | Release | v1.4.0 - Meme/Parody Lore & Flavor Text for all 1,851 cards
 [2026-11-05 17:12] Major | Antigravity | Write | src/data/cardSpecificLore.json, src/data/talingchanCards.json - 1,083 distinct per-card deep meme/parody/effect explanations
 [2026-11-05 17:12] Major | Antigravity | Release | v1.5.0 - Individual deep card-by-card meme & parody explanations for all 1,851 cards
+[2026-11-11 13:49] Major | Antigravity | Edit | scripts/sync_bottcg_cards.py, scripts/enrich_meme_lore.py, src/data/talingchanCards.json, src/data/talingchanSets.json, src/data/cardSpecificLore.json - sync 163 new cards (BT12, B2SA, B2SB, STOR, PRMO, APFD) totaling 2,014 cards across 39 sets with full deep meme/parody lore
+[2026-11-11 13:49] Major | Antigravity | Edit | src/components/playmat/PlayerBoardZone.tsx, src/components/playmat/PlaymatPage.tsx, src/utils/cardImage.test.ts - enforce >=9px font legibility guard on Playmat and update catalog integrity tests
+[2026-11-11 13:49] Major | Antigravity | Release | v1.6.0 - Add BT12, B2SA, B2SB, STOR, PRMO, APFD sets (2,014 total cards across 39 sets)
+[2026-11-11 14:15] Major | Antigravity | Edit | src/data/cardSpecificLore.json, src/data/talingchanCards.json, scripts/enrich_meme_lore.py - enrich all 2,014 cards (1,166 unique names) with structured real-world character/person prototype (🎯 ต้นแบบ/ล้อเลียน) and deep meme/wordplay explanation (💡 เจาะลึกมุกมีม)
+[2026-11-11 14:38] Major | Antigravity | Edit | src/index.css, src/App.tsx, src/components/collection/FilterBar.tsx, src/components/layout/Navbar.tsx, src/components/playmat/PlayerBoardZone.tsx - lock mobile horizontal scroll & fix FilterBar/Playmat mobile viewport overflow matching PokeCountTracker architecture
+[2026-11-11 23:25] Major | Antigravity | Bash | node scripts/upload-to-r2.mjs - synced all 2,014 card images to Cloudflare R2 bucket talingchancount-cards
+[2026-11-11 23:25] Major | Antigravity | Deploy | npx wrangler deploy - deployed v1.6.0 to Cloudflare Worker talingchancounttracker (talingchan.tcgcount.com)
+[2026-11-11 23:25] Major | Antigravity | Release | v1.6.0 - 2,014 cards across 39 sets with structured prototype/meme lore, R2 image sync, 4-Layer Gate, and mobile layout polish

@@ -1,7 +1,7 @@
 {
   "name": "talingchancounttracker",
   "private": true,
-  "version": "1.5.0",
+  "version": "1.6.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -12,7 +12,10 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "test:e2e:headed": "playwright test --headed"
+    "test:e2e:headed": "playwright test --headed",
+    "scope:ui": "node scripts/verify-scope.mjs ui-only",
+    "scope:builder": "node scripts/verify-scope.mjs logic-only",
+    "gate": "npm run lint && npm run build && npm test && npx playwright test"
   },
   "dependencies": {
     "clsx": "^2.1.1",

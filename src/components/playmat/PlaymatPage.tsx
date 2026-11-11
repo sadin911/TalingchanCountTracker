@@ -1103,19 +1103,19 @@ export function PlaymatPage() {
                       {/* Cost & Gems Badges */}
                       <div className="absolute top-0.5 left-0.5 flex items-center gap-0.5">
                         {card.cost !== null && (
-                          <span className="px-1 py-0.2 rounded bg-amber-500 text-slate-950 font-black text-[8px] shadow">
+                          <span className="px-1 py-0.2 rounded bg-amber-500 text-slate-950 font-black text-[9px] shadow">
                             C:{card.cost}
                           </span>
                         )}
                       </div>
                       <div className="absolute top-0.5 right-0.5">
-                        <span className="px-1 py-0.2 rounded bg-slate-950/90 text-cyan-300 border border-cyan-500/40 font-mono font-bold text-[8px]">
+                        <span className="px-1 py-0.2 rounded bg-slate-950/90 text-cyan-300 border border-cyan-500/40 font-mono font-bold text-[9px]">
                           💎{card.gems ?? 1}
                         </span>
                       </div>
 
                       {card.power !== null && (
-                        <div className="absolute bottom-3.5 right-0.5 px-1 py-0.2 rounded bg-red-600 text-white font-extrabold text-[8px]">
+                        <div className="absolute bottom-3.5 right-0.5 px-1 py-0.2 rounded bg-red-600 text-white font-extrabold text-[9px]">
                           ⚔️{card.power}
                         </div>
                       )}
@@ -1128,7 +1128,7 @@ export function PlaymatPage() {
                         </div>
                       )}
 
-                      <div className="absolute bottom-0 inset-x-0 bg-black/85 px-1 py-0.5 text-[8px] font-bold text-white truncate text-center">
+                      <div className="absolute bottom-0 inset-x-0 bg-black/85 px-1 py-0.5 text-[9px] font-bold text-white truncate text-center">
                         {card.name}
                       </div>
                     </div>

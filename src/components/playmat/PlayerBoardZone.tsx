@@ -210,10 +210,10 @@ export function PlayerBoardZone({
             >
               {lifeCard.isFaceDown ? (
                 <div className="w-full h-full flex items-center justify-between px-2">
-                  <span className="text-[8px] font-black tracking-wider text-slate-300">
+                  <span className="text-[9px] font-black tracking-wider text-slate-300">
                     LIFE #{idx + 1}
                   </span>
-                  <span className="text-[7px] text-rose-300/90 font-bold">คว่ำ</span>
+                  <span className="text-[9px] text-rose-300/90 font-bold">คว่ำ</span>
                 </div>
               ) : (
                 <div className="w-full h-full relative flex items-center">
@@ -230,10 +230,10 @@ export function PlayerBoardZone({
                     className="w-8 h-full object-cover object-top shrink-0 border-r border-amber-500/40"
                   />
                   <div className="flex-1 min-w-0 px-1 leading-tight">
-                    <div className="text-[8px] font-extrabold text-amber-200 truncate">
+                    <div className="text-[9px] font-extrabold text-amber-200 truncate">
                       {lifeCard.name}
                     </div>
-                    <div className="text-[7px] text-emerald-300 truncate">หงายแล้ว</div>
+                    <div className="text-[9px] text-emerald-300 truncate">หงายแล้ว</div>
                   </div>
                 </div>
               )}
@@ -242,7 +242,7 @@ export function PlayerBoardZone({
               {isEnemyOfActiveAttacker && (
                 <div className="absolute inset-0 bg-rose-950/80 flex items-center justify-center gap-1 z-20">
                   <Swords className="w-3 h-3 text-rose-300 animate-bounce" />
-                  <span className="text-[8px] font-black text-white">ตี Life #{idx + 1}!</span>
+                  <span className="text-[9px] font-black text-white">ตี Life #{idx + 1}!</span>
                 </div>
               )}
 
@@ -256,7 +256,7 @@ export function PlayerBoardZone({
                     type="button"
                     data-testid={`btn-flip-life-${board.id}-${idx}`}
                     onClick={() => onFlipLifeCard(idx)}
-                    className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-[7px] font-bold text-amber-300 cursor-pointer"
+                    className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-[9px] font-bold text-amber-300 cursor-pointer"
                   >
                     {lifeCard.isFaceDown ? 'หงาย' : 'คว่ำ'}
                   </button>
@@ -264,14 +264,14 @@ export function PlayerBoardZone({
                     type="button"
                     data-testid={`btn-destroy-life-${board.id}-${idx}`}
                     onClick={() => onDestroyLifeCardToHell(idx)}
-                    className="px-1 py-0.2 rounded bg-rose-900 hover:bg-rose-700 text-[7px] font-bold text-white cursor-pointer"
+                    className="px-1 py-0.2 rounded bg-rose-900 hover:bg-rose-700 text-[9px] font-bold text-white cursor-pointer"
                   >
                     ทำลาย
                   </button>
                   <button
                     type="button"
                     onClick={() => onAddLifeCardToHand(idx)}
-                    className="px-1 py-0.2 rounded bg-emerald-900 hover:bg-emerald-700 text-[7px] font-bold text-white cursor-pointer"
+                    className="px-1 py-0.2 rounded bg-emerald-900 hover:bg-emerald-700 text-[9px] font-bold text-white cursor-pointer"
                   >
                     มือ
                   </button>
@@ -291,7 +291,7 @@ export function PlayerBoardZone({
             `${board.name} — การ์ดใน LIFE Card Zone (${board.lifeZone.length} ใบ)`
           )
         }
-        className="text-[8px] text-center text-slate-300 hover:text-pink-300 font-bold tracking-wider uppercase cursor-pointer"
+        className="text-[9px] text-center text-slate-300 hover:text-pink-300 font-bold tracking-wider uppercase cursor-pointer"
       >
         LIFE CARD ({faceDownLifeCount} คว่ำ)
       </button>
@@ -313,13 +313,13 @@ export function PlayerBoardZone({
           title="คลิกที่กองเด็คเพื่อจั่วการ์ด 1 ใบ"
           className="botc-deck-card relative rounded-xl bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-950 border-2 border-slate-400/70 hover:border-emerald-400 shadow-lg flex flex-col items-center justify-center p-1 cursor-pointer group transition-transform active:scale-95"
         >
-          <span className="text-[7px] font-extrabold text-slate-300 tracking-tighter uppercase">
+          <span className="text-[9px] font-extrabold text-slate-300 tracking-tighter uppercase">
             BATTLE OF TALINGCHAN
           </span>
           <span className="text-xs font-black text-white font-mono my-0.5">
             {board.deck.length}
           </span>
-          <span className="text-[8px] font-bold text-emerald-300 group-hover:underline">
+          <span className="text-[9px] font-bold text-emerald-300 group-hover:underline">
             + จั่ว 1 ใบ
           </span>
         </button>
@@ -331,7 +331,7 @@ export function PlayerBoardZone({
             data-testid={`btn-draw-to-three-${board.id}`}
             onClick={onDrawToThree}
             title="จั่วเข้าเทิร์นให้ครบ 3 ใบ (หรือ +1 หากมี 3 ใบขึ้นไป)"
-            className="px-1 py-0.2 rounded bg-teal-900/90 hover:bg-teal-800 text-teal-200 border border-teal-500/40 text-[7px] font-bold cursor-pointer text-center"
+            className="px-1 py-0.2 rounded bg-teal-900/90 hover:bg-teal-800 text-teal-200 border border-teal-500/40 text-[9px] font-bold cursor-pointer text-center"
           >
             ครบ 3
           </button>
@@ -341,7 +341,7 @@ export function PlayerBoardZone({
             onClick={() =>
               onOpenZoneBrowser('DECK', `${board.name} — ดูการ์ดใบบนสุด 5 ใบ`, 5)
             }
-            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[7px] font-bold flex items-center justify-center gap-0.5 cursor-pointer"
+            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-cyan-300 text-[9px] font-bold flex items-center justify-center gap-0.5 cursor-pointer"
           >
             <Eye className="w-2 h-2" /> Top5
           </button>
@@ -354,7 +354,7 @@ export function PlayerBoardZone({
                 `${board.name} — ค้นหากองการ์ดหลัก (${board.deck.length} ใบ)`
               )
             }
-            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 text-[7px] font-bold flex items-center justify-center gap-0.5 cursor-pointer"
+            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-amber-300 text-[9px] font-bold flex items-center justify-center gap-0.5 cursor-pointer"
           >
             <Search className="w-2 h-2" /> ค้น
           </button>
@@ -363,7 +363,7 @@ export function PlayerBoardZone({
             data-testid={`btn-shuffle-${board.id}`}
             onClick={onShuffleDeck}
             title="สับกองการ์ด"
-            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[7px] font-bold flex items-center justify-center cursor-pointer"
+            className="px-1 py-0.2 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 text-[9px] font-bold flex items-center justify-center cursor-pointer"
           >
             <Shuffle className="w-2 h-2" />
           </button>
@@ -422,7 +422,7 @@ export function PlayerBoardZone({
                 นรก ({board.hellZone.length})
               </span>
               {selectedHandCardForThisSide && (
-                <span className="text-[7px] text-amber-300 font-bold">คลิกทิ้ง!</span>
+                <span className="text-[9px] text-amber-300 font-bold">คลิกทิ้ง!</span>
               )}
             </div>
           )}
@@ -440,7 +440,7 @@ export function PlayerBoardZone({
               `${board.name} — โซนมิติมืด / เนรเทศ (${board.darkZone.length} ใบ)`
             )
           }
-          className="w-full flex items-center justify-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-[8px] font-bold cursor-pointer"
+          className="w-full flex items-center justify-center gap-0.5 px-1.5 py-0.5 rounded-lg bg-zinc-900 hover:bg-zinc-800 border border-zinc-700 text-zinc-300 text-[9px] font-bold cursor-pointer"
         >
           <Ban className="w-2.5 h-2.5 text-zinc-400" />
           <span>มิติมืด ({board.darkZone.length})</span>
@@ -476,7 +476,7 @@ export function PlayerBoardZone({
           CONSTRUCT ({board.constructZone.filter(Boolean).length}/3)
         </span>
         {hasDuplicateConstruct && (
-          <span className="text-[8px] text-rose-300 flex items-center gap-0.5 font-bold">
+          <span className="text-[9px] text-rose-300 flex items-center gap-0.5 font-bold">
             <AlertTriangle className="w-2.5 h-2.5" /> ซ้ำ!
           </span>
         )}
@@ -521,16 +521,16 @@ export function PlayerBoardZone({
                     onRemoveConstructSlot(idx);
                   }}
                   title="ทำลาย Construct ลงนรก"
-                  className="opacity-0 group-hover:opacity-100 absolute top-0.5 right-0.5 px-1 py-0.2 rounded bg-rose-700/95 hover:bg-rose-600 text-white text-[7px] font-bold cursor-pointer transition-opacity"
+                  className="opacity-0 group-hover:opacity-100 absolute top-0.5 right-0.5 px-1 py-0.2 rounded bg-rose-700/95 hover:bg-rose-600 text-white text-[9px] font-bold cursor-pointer transition-opacity"
                 >
                   ลงนรก
                 </button>
-                <div className="absolute bottom-0 inset-x-0 bg-black/85 px-0.5 py-0.2 text-[7px] font-bold text-white truncate text-center">
+                <div className="absolute bottom-0 inset-x-0 bg-black/85 px-0.5 py-0.2 text-[9px] font-bold text-white truncate text-center">
                   {slot.card.name}
                 </div>
               </div>
             ) : (
-              <span className="text-[7px] font-extrabold text-center px-0.5">
+              <span className="text-[9px] font-extrabold text-center px-0.5">
                 {canHighlightEmptyConstructSlot ? '✨ วาง' : `#${idx + 1}`}
               </span>
             )}
@@ -541,25 +541,25 @@ export function PlayerBoardZone({
   );
 
   const renderAvatarBox = () => (
-    <div className="bg-rose-950/35 border-2 border-rose-500/65 rounded-xl px-2.5 py-1 flex flex-col items-center justify-center gap-1 shadow-md flex-1 min-w-0">
-      <div className="flex items-center justify-between gap-2 w-full">
+    <div className="bg-rose-950/35 border-2 border-rose-500/65 rounded-xl px-1.5 sm:px-2.5 py-1 flex flex-col items-center justify-center gap-1 shadow-md flex-1 min-w-0">
+      <div className="flex items-center justify-between gap-1 sm:gap-2 w-full min-w-0 flex-wrap">
         <span
           data-testid={`avatar-zone-header-${board.id}`}
-          className="text-[9px] font-black text-rose-300 flex items-center gap-1 tracking-wide uppercase"
+          className="text-[9px] font-black text-rose-300 flex items-center gap-1 tracking-wide uppercase truncate"
         >
-          <Shield className="w-3 h-3 text-rose-400" />
+          <Shield className="w-3 h-3 text-rose-400 shrink-0" />
           AVATAR ZONE ({board.avatarZone.filter(Boolean).length}/{board.avatarZoneLimit} ช่อง)
         </span>
 
         {/* Expand / Shrink Avatar Zone (4..8 slots) */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 shrink-0">
           <button
             type="button"
             data-testid={`btn-shrink-avatar-zone-${board.id}`}
             disabled={board.avatarZoneLimit <= 4}
             onClick={() => onChangeAvatarZoneLimit(board.avatarZoneLimit - 1)}
             title="ลดช่อง Avatar Zone (ต่ำสุด 4 ช่อง)"
-            className="px-1.5 py-0.2 rounded bg-slate-900 hover:bg-slate-800 disabled:opacity-35 text-slate-200 text-[8px] font-bold flex items-center gap-0.5 cursor-pointer"
+            className="px-1 sm:px-1.5 py-0.2 rounded bg-slate-900 hover:bg-slate-800 disabled:opacity-35 text-slate-200 text-[9px] font-bold flex items-center gap-0.5 cursor-pointer"
           >
             <Minus className="w-2.5 h-2.5" /> ลด
           </button>
@@ -569,7 +569,7 @@ export function PlayerBoardZone({
             disabled={board.avatarZoneLimit >= 8}
             onClick={() => onChangeAvatarZoneLimit(board.avatarZoneLimit + 1)}
             title="ขยายช่อง Avatar Zone จากเอฟเฟกต์การ์ด (สูงสุด 8 ช่อง)"
-            className="px-1.5 py-0.2 rounded bg-rose-600/40 hover:bg-rose-600/60 disabled:opacity-35 border border-rose-400/50 text-rose-100 text-[8px] font-bold flex items-center gap-0.5 cursor-pointer"
+            className="px-1 sm:px-1.5 py-0.2 rounded bg-rose-600/40 hover:bg-rose-600/60 disabled:opacity-35 border border-rose-400/50 text-rose-100 text-[9px] font-bold flex items-center gap-0.5 cursor-pointer"
           >
             <Plus className="w-2.5 h-2.5" /> ขยายช่อง ({board.avatarZoneLimit})
           </button>
@@ -642,7 +642,7 @@ export function PlayerBoardZone({
                         onQuickAdjustAvatarPower(idx, -1);
                       }}
                       title="ลด POWER -1"
-                      className="opacity-0 group-hover:opacity-100 w-3.5 h-3.5 rounded bg-slate-950/90 hover:bg-rose-700 text-white text-[8px] font-black flex items-center justify-center border border-slate-700 cursor-pointer transition-opacity"
+                      className="opacity-0 group-hover:opacity-100 w-3.5 h-3.5 rounded bg-slate-950/90 hover:bg-rose-700 text-white text-[9px] font-black flex items-center justify-center border border-slate-700 cursor-pointer transition-opacity"
                     >
                       -
                     </button>
@@ -665,7 +665,7 @@ export function PlayerBoardZone({
                         onQuickAdjustAvatarPower(idx, 1);
                       }}
                       title="เพิ่ม POWER +1"
-                      className="opacity-0 group-hover:opacity-100 w-3.5 h-3.5 rounded bg-slate-950/90 hover:bg-emerald-700 text-white text-[8px] font-black flex items-center justify-center border border-slate-700 cursor-pointer transition-opacity"
+                      className="opacity-0 group-hover:opacity-100 w-3.5 h-3.5 rounded bg-slate-950/90 hover:bg-emerald-700 text-white text-[9px] font-black flex items-center justify-center border border-slate-700 cursor-pointer transition-opacity"
                     >
                       +
                     </button>
@@ -673,14 +673,14 @@ export function PlayerBoardZone({
 
                   {/* Rested Indicator */}
                   {slot.isRested && (
-                    <div className="absolute top-0.5 left-0.5 px-1 py-0.2 rounded bg-amber-500 text-slate-950 text-[7px] font-black">
+                    <div className="absolute top-0.5 left-0.5 px-1 py-0.2 rounded bg-amber-500 text-slate-950 text-[9px] font-black">
                       REST
                     </div>
                   )}
 
                   {/* Attached Modification Count */}
                   {slot.attachedModifications.length > 0 && (
-                    <div className="absolute bottom-3.5 left-0.5 px-1 py-0.2 rounded bg-amber-950/90 border border-amber-400/60 text-amber-200 text-[7px] font-bold">
+                    <div className="absolute bottom-3.5 left-0.5 px-1 py-0.2 rounded bg-amber-950/90 border border-amber-400/60 text-amber-200 text-[9px] font-bold">
                       🗡️ +{slot.attachedModifications.length}
                     </div>
                   )}
@@ -689,9 +689,9 @@ export function PlayerBoardZone({
                   {isEnemyOfActiveAttacker && (
                     <div className="absolute inset-0 bg-rose-950/65 backdrop-blur-[1px] flex flex-col items-center justify-center p-1 text-center z-20">
                       <Swords className="w-3.5 h-3.5 text-rose-300 animate-bounce" />
-                      <span className="text-[8px] font-black text-white">คลิกโจมตี!</span>
+                      <span className="text-[9px] font-black text-white">คลิกโจมตี!</span>
                       <span
-                        className={`mt-0.5 px-1 py-0.2 rounded text-[7px] font-extrabold ${
+                        className={`mt-0.5 px-1 py-0.2 rounded text-[9px] font-extrabold ${
                           attackerPower > slotPower
                             ? 'bg-emerald-500 text-slate-950'
                             : attackerPower === slotPower
@@ -711,7 +711,7 @@ export function PlayerBoardZone({
                   {/* Modification Target Overlay */}
                   {canHighlightOccupiedAvatarForMod && (
                     <div className="absolute inset-0 bg-amber-950/60 flex flex-col items-center justify-center p-1 text-center z-20">
-                      <span className="text-[8px] font-black text-amber-200">
+                      <span className="text-[9px] font-black text-amber-200">
                         🗡️ คลิกสวมใส่!
                       </span>
                     </div>
@@ -727,7 +727,7 @@ export function PlayerBoardZone({
                           onStartAttackWithAvatar(idx, slot);
                         }}
                         title="เลือกเป้าหมายโจมตีบนกระดาน"
-                        className="px-1 py-0.2 rounded bg-rose-600 hover:bg-rose-500 text-white text-[7px] font-extrabold flex items-center gap-0.5 cursor-pointer"
+                        className="px-1 py-0.2 rounded bg-rose-600 hover:bg-rose-500 text-white text-[9px] font-extrabold flex items-center gap-0.5 cursor-pointer"
                       >
                         <Swords className="w-2 h-2" /> ตี
                       </button>
@@ -767,24 +767,24 @@ export function PlayerBoardZone({
                     </div>
                   )}
 
-                  <div className="absolute bottom-0 inset-x-0 bg-black/85 px-0.5 py-0.2 text-[7px] font-bold text-white truncate text-center">
+                  <div className="absolute bottom-0 inset-x-0 bg-black/85 px-0.5 py-0.2 text-[9px] font-bold text-white truncate text-center">
                     {slot.card.name}
                   </div>
                 </div>
               ) : (
                 <div className="text-center px-0.5">
                   {canHighlightEmptyAvatarSlot ? (
-                    <span className="text-[8px] font-extrabold text-emerald-300 flex flex-col items-center">
+                    <span className="text-[9px] font-extrabold text-emerald-300 flex flex-col items-center">
                       <Sparkles className="w-2.5 h-2.5" />
                       วาง #{idx + 1}
                     </span>
                   ) : (
                     <>
-                      <span className="text-[8px] font-bold block leading-tight">
+                      <span className="text-[9px] font-bold block leading-tight">
                         Avatar #{idx + 1}
                       </span>
                       {idx >= 4 && (
-                        <span className="text-[7px] text-rose-300/75 block leading-tight">
+                        <span className="text-[9px] text-rose-300/75 block leading-tight">
                           (เสริม)
                         </span>
                       )}
@@ -840,13 +840,13 @@ export function PlayerBoardZone({
           <span className="text-[9px] font-black text-sky-300 flex items-center gap-1 tracking-wide uppercase">
             <Wand2 className="w-3 h-3 text-sky-400" /> MAGIC ZONE ({board.magicZone.length})
           </span>
-          <span className="text-[8px] text-sky-200/70">
+          <span className="text-[9px] text-sky-200/70">
             {canHighlightMagicZone ? '✨ คลิกหรือลากมาร่ายเวทย์!' : 'โซนเวทมนตร์ (วางได้ไม่จำกัด)'}
           </span>
         </div>
 
         {board.magicZone.length === 0 ? (
-          <div className="botc-magic-card rounded-lg border border-dashed border-sky-400/35 flex items-center justify-center text-[8px] text-sky-200/45 px-2">
+          <div className="botc-magic-card rounded-lg border border-dashed border-sky-400/35 flex items-center justify-center text-[9px] text-sky-200/45 px-2">
             Magic
           </div>
         ) : (
@@ -873,7 +873,7 @@ export function PlayerBoardZone({
                     e.stopPropagation();
                     onResolveMagicToHell(mCard.instanceId);
                   }}
-                  className="absolute inset-x-0 bottom-0 bg-rose-700/95 hover:bg-rose-600 text-white text-[7px] font-extrabold py-0.2 text-center cursor-pointer"
+                  className="absolute inset-x-0 bottom-0 bg-rose-700/95 hover:bg-rose-600 text-white text-[9px] font-extrabold py-0.2 text-center cursor-pointer"
                 >
                   ใช้เสร็จ → นรก
                 </button>
@@ -913,7 +913,7 @@ export function PlayerBoardZone({
             </span>
           </div>
 
-          <span className="text-[8px] text-cyan-200/75">
+          <span className="text-[9px] text-cyan-200/75">
             {canHighlightGemZone
               ? '✨ ลากการ์ดมาปล่อย หรือคลิกที่นี่เพื่อวางเป็น Gem!'
               : 'ลากการ์ดจากมือมาวางเป็น Gem เพื่อจ่าย Cost'}
@@ -929,7 +929,7 @@ export function PlayerBoardZone({
                   onFlushGemZoneToHell();
                 }}
                 title="ส่งการ์ดในช่อง Gem ทั้งหมดลงโซนนรก (เมื่อใช้จ่าย Cost เสร็จ)"
-                className="px-1.5 py-0.5 rounded bg-rose-600 hover:bg-rose-500 text-white text-[8px] font-extrabold flex items-center gap-0.5 cursor-pointer shadow"
+                className="px-1.5 py-0.5 rounded bg-rose-600 hover:bg-rose-500 text-white text-[9px] font-extrabold flex items-center gap-0.5 cursor-pointer shadow"
               >
                 <Flame className="w-2.5 h-2.5" /> ใช้ Gem ส่งลงนรก
               </button>
@@ -942,7 +942,7 @@ export function PlayerBoardZone({
                     `${board.name} — การ์ดในช่อง Gem (${board.gemZone.length} ใบ • รวม 💎${totalGemInZone})`
                   );
                 }}
-                className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-200 text-[8px] font-bold cursor-pointer"
+                className="px-1.5 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-cyan-200 text-[9px] font-bold cursor-pointer"
               >
                 จัดการ
               </button>
@@ -954,7 +954,7 @@ export function PlayerBoardZone({
         {(board.gemZone?.length || 0) === 0 ? (
           <div className="botc-magic-card rounded-lg border border-dashed border-cyan-400/45 bg-slate-950/50 flex flex-col items-center justify-center p-1 text-center">
             <Gem className="w-3.5 h-3.5 text-cyan-400/70 mb-0.5" />
-            <span className="text-[7px] font-bold text-cyan-200/70 leading-tight">
+            <span className="text-[9px] font-bold text-cyan-200/70 leading-tight">
               ลากวาง Gem
             </span>
           </div>
@@ -976,7 +976,7 @@ export function PlayerBoardZone({
                   }}
                   className="w-full h-full object-cover cursor-pointer"
                 />
-                <div className="absolute top-0.5 right-0.5 px-1 py-0.2 rounded bg-slate-950/90 text-cyan-300 border border-cyan-400/60 font-mono font-black text-[8px]">
+                <div className="absolute top-0.5 right-0.5 px-1 py-0.2 rounded bg-slate-950/90 text-cyan-300 border border-cyan-400/60 font-mono font-black text-[9px]">
                   💎{gCard.gems ?? 1}
                 </div>
                 <div
@@ -987,7 +987,7 @@ export function PlayerBoardZone({
                     type="button"
                     onClick={() => onReturnGemCardToHand(gCard.instanceId)}
                     title="นำกลับขึ้นมือ"
-                    className="text-[7px] font-bold text-emerald-300 hover:underline flex items-center cursor-pointer"
+                    className="text-[9px] font-bold text-emerald-300 hover:underline flex items-center cursor-pointer"
                   >
                     <Undo2 className="w-2 h-2" /> มือ
                   </button>
@@ -995,7 +995,7 @@ export function PlayerBoardZone({
                     type="button"
                     onClick={() => onSendGemCardToHell(gCard.instanceId)}
                     title="ส่งลงนรก"
-                    className="text-[7px] font-bold text-rose-300 hover:underline cursor-pointer"
+                    className="text-[9px] font-bold text-rose-300 hover:underline cursor-pointer"
                   >
                     นรก
                   </button>
@@ -1011,7 +1011,7 @@ export function PlayerBoardZone({
   return (
     <div
       data-testid={`player-board-${board.id}`}
-      className={`flex-1 min-h-0 w-full px-2.5 py-1 flex items-center justify-between gap-2 transition-colors ${
+      className={`flex-1 min-h-0 w-full max-w-full overflow-x-auto no-scrollbar px-1.5 sm:px-2.5 py-1 flex items-center justify-between gap-1.5 sm:gap-2 transition-colors ${
         isActiveTurn
           ? board.id === 'player1'
             ? 'bg-blue-950/15'

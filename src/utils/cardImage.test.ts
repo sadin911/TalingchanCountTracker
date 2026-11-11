@@ -32,12 +32,12 @@ describe('Card Image Resolver & Official BotTCG Catalog Integrity', () => {
     expect(resolveCardImageUrl(null, null)).toBe(DEFAULT_CARD_PLACEHOLDER);
   });
 
-  it('contains all 1,851 official cards across 35 sets with zero broken placeholders', () => {
-    expect(cardsData.length).toBe(1851);
-    expect(setsData.length).toBe(35);
+  it('contains all 2,014 official cards across 39 sets with zero broken placeholders', () => {
+    expect(cardsData.length).toBe(2014);
+    expect(setsData.length).toBe(39);
 
     const uniqueIds = new Set(cardsData.map((c) => c.id));
-    expect(uniqueIds.size).toBe(1851);
+    expect(uniqueIds.size).toBe(2014);
 
     for (const card of cardsData) {
       expect(card.setCode).toBeTruthy();
@@ -49,9 +49,9 @@ describe('Card Image Resolver & Official BotTCG Catalog Integrity', () => {
       expect(card.memeLore!.length).toBeGreaterThan(80);
     }
 
-    // Verify 100% distinct per-card deep lore across all 1,083 unique card names
+    // Verify 100% distinct per-card deep lore across all 1,166 unique card names
     const loreValues = Object.values(cardSpecificLore);
-    expect(loreValues.length).toBe(1083);
-    expect(new Set(loreValues).size).toBe(1083);
+    expect(loreValues.length).toBe(1166);
+    expect(new Set(loreValues).size).toBe(1166);
   });
 });
