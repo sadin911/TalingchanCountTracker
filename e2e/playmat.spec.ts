@@ -15,6 +15,21 @@ test.describe('Solo Practice Playmat & Account Menu E2E', () => {
     await expect(page.getByTestId('collection-backup-modal')).toBeVisible();
   });
 
+  test('opens MCP Server modal and generates a scoped Personal Access Token', async ({ page }) => {
+    await page.goto('/');
+
+    await page.getByTestId('btn-account-menu').click();
+    await expect(page.getByTestId('btn-open-mcp-modal')).toBeVisible();
+    await page.getByTestId('btn-open-mcp-modal').click();
+
+    await expect(page.getByTestId('mcp-server-modal')).toBeVisible();
+    await expect(page.getByTestId('mcp-config-snippet')).toContainText('/mcp');
+
+    await page.getByTestId('btn-generate-mcp-token').click();
+    await expect(page.getByTestId('mcp-new-token-box')).toBeVisible();
+    await expect(page.getByTestId('mcp-new-token-box')).toContainText('tct_mcp_');
+  });
+
   test('runs Dual-Side Solo Playmat: expandable Avatar Zone, Cost payment to Hell Zone, Combat, and P1/P2 hand switch', async ({
     page,
   }) => {

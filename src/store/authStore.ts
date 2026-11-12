@@ -4,6 +4,7 @@ import { auth, signInWithGoogle, logOut } from '../utils/firebase.ts';
 import { useCollectionStore } from './collectionStore.ts';
 import { useDeckStore } from './deckStore.ts';
 import { syncUserProfile, deleteUserCloudData } from '../services/userService.ts';
+import { reconcileUserMcpTokens } from '../services/mcpTokenService.ts';
 
 interface AuthState {
   user: User | null;
@@ -21,8 +22,12 @@ export const useAuthStore = create<AuthState>((set) => {
       set({ user, loading: false, error: null });
       if (user) {
         syncUserProfile(user).catch(console.warn);
-        useCollectionStore.getState().loadUserFromCloud(user.uid).catch(console.warn);
-        useDeckStore.getState().loadUserDecksFromCloud(user.uid).catch(console.warn);
+        Promise.all([
+          useCollectionStore.getState().loadUserFromCloud(user.uid),
+          useDeckStore.getState().loadUserDecksFromCloud(user.uid),
+        ])
+          .then(() => reconcileUserMcpTokens(user.uid))
+          .catch(console.warn);
       } else {
         useCollectionStore.getState().resetToGuest();
         useDeckStore.getState().resetToGuestDecks();

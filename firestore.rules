@@ -98,5 +98,37 @@ service cloud.firestore {
     match /playmat_signals/{roomCode} {
       allow read, write: if true;
     }
+
+    // ---------------------------------------------------------------------
+    // mcp_tokens/{tokenHash} — capability-keyed Remote MCP Server vaults.
+    // Document ID is SHA-256(rawToken) (256-bit unguessable secret).
+    // ---------------------------------------------------------------------
+    match /mcp_tokens/{tokenHash} {
+      // Single-document lookup by exact SHA-256 hash is allowed for the Cloudflare Worker;
+      // listing/querying tokens is strictly restricted to the authenticated owner.
+      allow get: if true;
+      allow list: if isSignedIn() && resource.data.uid == request.auth.uid;
+
+      allow create: if isSignedIn()
+                    && request.resource.data.uid == request.auth.uid
+                    && request.resource.data.tokenHash == tokenHash;
+
+      allow delete: if isSignedIn() && resource.data.uid == request.auth.uid;
+
+      // Owner can update/revoke from Web UI; Cloudflare Worker can update cards/decks
+      // only when token is active (not revoked) and has 'read_write' scope, without
+      // altering immutable identity/security fields.
+      allow update: if (isSignedIn() && resource.data.uid == request.auth.uid)
+                    || (
+                      resource.data.revoked == false
+                      && resource.data.scope == 'read_write'
+                      && request.resource.data.uid == resource.data.uid
+                      && request.resource.data.tokenHash == resource.data.tokenHash
+                      && request.resource.data.scope == resource.data.scope
+                      && request.resource.data.revoked == resource.data.revoked
+                      && request.resource.data.createdAt == resource.data.createdAt
+                      && request.resource.data.expiresAt == resource.data.expiresAt
+                    );
+    }
   }
 }

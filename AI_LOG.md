@@ -78,3 +78,7 @@
 [2026-11-12 21:49] Major | Antigravity | Write | scripts/upgrade_hd_images.py - upgraded 436 cards with Fandom Wiki HD scans (1175x1600) and 340 cards with 2x Lanczos+UnsharpMask upscaling, uploaded all 2,014 HD images to R2
 [2026-11-12 21:49] Major | Antigravity | Edit | src/components/collection/CardDetailModal.tsx, vite.config.ts - enlarged card detail modal artwork (max-w-4xl) with full-screen zoom lightbox and switched dev server port to 5175
 [2026-11-12 21:49] Major | Antigravity | Release | v1.7.0 - High-Res Card Images on R2 & Enlarged Card Detail Modal with Full-Screen Zoom Lightbox
+[2026-11-12 22:31] Major | Antigravity | Write | docs/superpowers/specs/2026-11-12-mcp-server-design.md, docs/superpowers/plans/2026-11-12-mcp-server.md - designed Remote Streamable HTTP MCP Server with 5-Layer Non-Destructive Guardrails
+[2026-11-12 22:31] Major | Antigravity | Write | src/types/mcp.ts, src/utils/mcpCatalogEngine.ts, src/utils/mcpCatalogEngine.test.ts, src/services/mcpTokenService.ts, src/worker.ts - implemented 8 MCP tools, SHA-256 PAT tokens, and Cloudflare Worker /mcp endpoint
+[2026-11-12 22:31] Major | Antigravity | Edit | src/components/layout/AccountMenu.tsx, firestore.rules, wrangler.jsonc, e2e/playmat.spec.ts - added React Portal MCP Token Manager Modal and verified 4-Layer Gate (41 Vitest + 6 Playwright E2E)
+[2026-11-12 22:31] Major | Antigravity | Release | v1.8.0 - Remote Streamable HTTP MCP Server (talingchan.tcgcount.com/mcp) & Scoped AI Token Manager
