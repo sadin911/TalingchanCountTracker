@@ -83,3 +83,5 @@
 [2026-11-12 22:31] Major | Antigravity | Edit | src/components/layout/AccountMenu.tsx, firestore.rules, wrangler.jsonc, e2e/playmat.spec.ts - added React Portal MCP Token Manager Modal and verified 4-Layer Gate (41 Vitest + 6 Playwright E2E)
 [2026-11-12 22:35] Major | Antigravity | Deploy | src/utils/cardImage.ts, npx wrangler deploy - guarded import.meta.env for Cloudflare Worker runtime and deployed v1.8.0 to https://talingchan.tcgcount.com/mcp
 [2026-11-12 22:35] Major | Antigravity | Release | v1.8.0 - Remote Streamable HTTP MCP Server (talingchan.tcgcount.com/mcp) & Scoped AI Token Manager
+[2026-11-12 22:49] Major | Antigravity | Edit | src/services/mcpTokenService.ts, src/worker.ts, src/components/layout/AccountMenu.tsx, wrangler.jsonc - fixed Firestore permission error via users/{uid}/mcp_tokens + Cloudflare R2 Edge Vault (/mcp/vault) and added persistent Copy Token button
+[2026-11-12 22:49] Major | Antigravity | Release | v1.8.1 - Fix MCP Token creation permissions via R2 Edge Vault & allow re-copying created tokens anytime

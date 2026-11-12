@@ -6,6 +6,7 @@ export type McpTokenScope = 'read' | 'read_write';
 export interface McpTokenRecord {
   tokenHash: string;
   tokenPrefix: string;
+  rawToken?: string;
   uid: string;
   label: string;
   scope: McpTokenScope;

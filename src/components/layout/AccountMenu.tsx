@@ -105,6 +105,10 @@ export function AccountMenu() {
     setShowMcpModal(true);
     const list = await listUserMcpTokens(user?.uid);
     setMcpTokens(list);
+    const latestWithRaw = list.find((t) => !t.revoked && t.rawToken);
+    if (latestWithRaw?.rawToken) {
+      setNewlyCreatedRawToken(latestWithRaw.rawToken);
+    }
   }
 
   async function handleGenerateMcpToken() {
@@ -119,7 +123,7 @@ export function AccountMenu() {
       setNewlyCreatedRawToken(rawToken);
       const list = await listUserMcpTokens(user?.uid);
       setMcpTokens(list);
-      setMcpFeedback('สร้าง MCP Token สำเร็จ! กรุณาคัดลอกเก็บไว้ทันที (แสดงเพียงครั้งเดียว)');
+      setMcpFeedback('สร้าง MCP Token สำเร็จ! สามารถกดคัดลอก Token หรือ JSON Config ด้านล่างได้เลย ✓');
     } catch (err) {
       const msg = err instanceof Error ? err.message : 'ไม่สามารถสร้าง Token ได้';
       setMcpFeedback(msg);
@@ -536,6 +540,19 @@ export function AccountMenu() {
                           <div className="text-[11px] text-slate-500 font-mono">{t.tokenPrefix}</div>
                         </div>
                         <div className="flex items-center gap-1.5 shrink-0">
+                          {t.rawToken && !t.revoked && (
+                            <button
+                              type="button"
+                              onClick={() => {
+                                navigator.clipboard.writeText(t.rawToken!);
+                                setNewlyCreatedRawToken(t.rawToken!);
+                                setMcpFeedback(`คัดลอก Token "${t.label}" ลงคลิปบอร์ดแล้ว ✓`);
+                              }}
+                              className="flex items-center gap-1 px-2 py-1 rounded-lg bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 text-[11px] font-bold cursor-pointer"
+                            >
+                              <Copy className="w-3 h-3" /> คัดลอก
+                            </button>
+                          )}
                           {!t.revoked && (
                             <button
                               type="button"
