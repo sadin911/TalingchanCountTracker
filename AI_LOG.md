@@ -81,4 +81,5 @@
 [2026-11-12 22:31] Major | Antigravity | Write | docs/superpowers/specs/2026-11-12-mcp-server-design.md, docs/superpowers/plans/2026-11-12-mcp-server.md - designed Remote Streamable HTTP MCP Server with 5-Layer Non-Destructive Guardrails
 [2026-11-12 22:31] Major | Antigravity | Write | src/types/mcp.ts, src/utils/mcpCatalogEngine.ts, src/utils/mcpCatalogEngine.test.ts, src/services/mcpTokenService.ts, src/worker.ts - implemented 8 MCP tools, SHA-256 PAT tokens, and Cloudflare Worker /mcp endpoint
 [2026-11-12 22:31] Major | Antigravity | Edit | src/components/layout/AccountMenu.tsx, firestore.rules, wrangler.jsonc, e2e/playmat.spec.ts - added React Portal MCP Token Manager Modal and verified 4-Layer Gate (41 Vitest + 6 Playwright E2E)
-[2026-11-12 22:31] Major | Antigravity | Release | v1.8.0 - Remote Streamable HTTP MCP Server (talingchan.tcgcount.com/mcp) & Scoped AI Token Manager
+[2026-11-12 22:35] Major | Antigravity | Deploy | src/utils/cardImage.ts, npx wrangler deploy - guarded import.meta.env for Cloudflare Worker runtime and deployed v1.8.0 to https://talingchan.tcgcount.com/mcp
+[2026-11-12 22:35] Major | Antigravity | Release | v1.8.0 - Remote Streamable HTTP MCP Server (talingchan.tcgcount.com/mcp) & Scoped AI Token Manager

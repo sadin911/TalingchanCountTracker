@@ -1,7 +1,12 @@
 import type React from 'react';
 import type { TalingchanCard } from '../types/card.ts';
 
-export const DEFAULT_CARD_PLACEHOLDER = `${import.meta.env.BASE_URL || '/'}card-placeholder.svg`.replace('//', '/');
+const viteBaseUrl =
+  typeof import.meta !== 'undefined' &&
+  typeof (import.meta as unknown as { env?: { BASE_URL?: string } }).env === 'object'
+    ? (import.meta as unknown as { env?: { BASE_URL?: string } }).env?.BASE_URL
+    : '/';
+export const DEFAULT_CARD_PLACEHOLDER = `${viteBaseUrl || '/'}card-placeholder.svg`.replace('//', '/');
 export const R2_PUBLIC_BASE_URL = 'https://pub-851c7b1da9514507a99b79bc2fd47577.r2.dev';
 export const R2_CDN_BASE = R2_PUBLIC_BASE_URL;
 
