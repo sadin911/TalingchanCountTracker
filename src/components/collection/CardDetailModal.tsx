@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import { X, Layers, Heart, Sparkles, AlertTriangle, Laugh, Quote } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { X, Layers, Heart, Sparkles, AlertTriangle, Laugh, Quote, ZoomIn, ZoomOut } from 'lucide-react';
 import type { TalingchanCard } from '../../types/card.ts';
 import { rarityLabel } from '../../types/card.ts';
 import { COLOR_STYLES, TYPE_BADGES } from '../../constants/botc.ts';
-import { resolveCardImageUrl, handleCardImageError } from '../../utils/cardImage.ts';
+import { resolveCardImageUrl, handleCardImageError, cardImageKey } from '../../utils/cardImage.ts';
 import { useDeckStore } from '../../store/deckStore.ts';
 import { useCollectionStore } from '../../store/collectionStore.ts';
 
@@ -13,6 +13,7 @@ interface CardDetailModalProps {
 }
 
 export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
+  const [isZoomed, setIsZoomed] = useState(false);
   const activeDeckId = useDeckStore((s) => s.activeDeckId);
   const activeDeck = useDeckStore((s) => s.decks.find((d) => d.id === activeDeckId));
   const addCardToMain = useDeckStore((s) => s.addCardToMain);
@@ -21,11 +22,17 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
 
   useEffect(() => {
     function handleKeyDown(e: KeyboardEvent) {
-      if (e.key === 'Escape') onClose();
+      if (e.key === 'Escape') {
+        if (isZoomed) {
+          setIsZoomed(false);
+        } else {
+          onClose();
+        }
+      }
     }
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [onClose, isZoomed]);
 
   if (!card) return null;
 
@@ -36,40 +43,76 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
   const mainCountInActiveDeck = activeDeck?.mainDeck.find((c) => c.id === card.id)?.count || 0;
   const lifeCountInActiveDeck = activeDeck?.lifeDeck.find((c) => c.id === card.id)?.count || 0;
 
+  // Prefer local high-res asset in DEV mode if available, otherwise R2 CDN
+  const detailImageSrc =
+    import.meta.env.DEV && card.setCode && card.collectorNumber
+      ? `/${cardImageKey(card.setCode, card.collectorNumber)}`
+      : resolveCardImageUrl(card, false);
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-fadeIn">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md animate-fadeIn"
+      onClick={onClose}
+    >
       {/* Modal Dialog */}
       <div
-        className="relative w-full max-w-2xl bg-[#121522] border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+        className="relative w-full max-w-4xl bg-[#121522] border border-slate-700/80 rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row max-h-[92vh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full bg-slate-900/80 hover:bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700 transition-colors"
+          aria-label="ปิดหน้าต่างรายละเอียดการ์ด"
+          className="absolute top-3.5 right-3.5 z-20 w-9 h-9 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-300 hover:text-white flex items-center justify-center border border-slate-700 transition-colors shadow-lg"
         >
           <X className="w-5 h-5" />
         </button>
 
         {/* Card Artwork Column */}
-        <div className="w-full md:w-5/12 bg-[#181c2e] p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-800">
-          <div className="relative aspect-[3/4] w-48 md:w-full rounded-xl overflow-hidden shadow-2xl border border-slate-700/60">
+        <div className="w-full md:w-[46%] lg:w-[48%] bg-gradient-to-b from-[#1a1f35] to-[#131726] p-4 sm:p-6 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-800/90 shrink-0">
+          <div
+            onClick={() => setIsZoomed(true)}
+            role="button"
+            tabIndex={0}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                setIsZoomed(true);
+              }
+            }}
+            data-testid="card-detail-artwork-trigger"
+            className="group relative aspect-[388/528] w-64 sm:w-72 md:w-full max-w-[360px] rounded-2xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.75)] border border-slate-700/70 bg-slate-950/60 cursor-zoom-in transition-transform duration-200 hover:scale-[1.02]"
+          >
             <img
-              src={resolveCardImageUrl(card, false)}
+              src={detailImageSrc}
               alt={card.name}
               onError={(e) => handleCardImageError(e, card.imageUrl, card)}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-contain select-none"
             />
+            <div className="absolute bottom-2.5 right-2.5 px-2.5 py-1 rounded-full bg-slate-950/85 border border-slate-700/80 text-[11px] font-medium text-slate-200 flex items-center gap-1.5 opacity-90 group-hover:opacity-100 group-hover:bg-rose-600/90 group-hover:border-rose-400/60 transition-all shadow-lg">
+              <ZoomIn className="w-3.5 h-3.5" />
+              <span>ขยายเต็มจอ</span>
+            </div>
           </div>
 
-          <div className="mt-4 flex items-center gap-2 text-xs text-slate-400">
-            <span>ภาพโดย:</span>
-            <span className="font-semibold text-slate-200">{card.illustrator || 'PASULOL'}</span>
+          <div className="mt-3.5 flex items-center justify-between w-full max-w-[360px] px-1 text-xs text-slate-400">
+            <div className="flex items-center gap-1.5">
+              <span>ภาพโดย:</span>
+              <span className="font-semibold text-slate-200">{card.illustrator || 'PASULOL'}</span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setIsZoomed(true)}
+              className="text-rose-400 hover:text-rose-300 font-medium flex items-center gap-1 transition-colors"
+            >
+              <ZoomIn className="w-3.5 h-3.5" />
+              <span>ดูภาพขนาดใหญ่</span>
+            </button>
           </div>
         </div>
 
         {/* Card Details Column */}
-        <div className="w-full md:w-7/12 p-6 overflow-y-auto space-y-4">
+        <div className="w-full md:w-[54%] lg:w-[52%] p-5 sm:p-6 overflow-y-auto space-y-4">
           <div>
             {/* Header tags */}
             <div className="flex items-center gap-2 flex-wrap mb-1">
@@ -203,6 +246,42 @@ export function CardDetailModal({ card, onClose }: CardDetailModalProps) {
           </div>
         </div>
       </div>
+
+      {/* Full-Screen High-Res Card Lightbox */}
+      {isZoomed && (
+        <div
+          data-testid="card-detail-lightbox"
+          className="fixed inset-0 z-[60] flex flex-col items-center justify-center p-4 bg-black/95 backdrop-blur-xl animate-fadeIn cursor-zoom-out"
+          onClick={(e) => {
+            e.stopPropagation();
+            setIsZoomed(false);
+          }}
+        >
+          <button
+            type="button"
+            onClick={() => setIsZoomed(false)}
+            aria-label="ปิดโหมดขยายภาพการ์ด"
+            className="absolute top-4 right-4 z-10 px-3.5 py-2 rounded-full bg-slate-900/90 hover:bg-slate-800 text-slate-200 hover:text-white flex items-center gap-1.5 border border-slate-700 text-xs font-medium shadow-xl transition-colors"
+          >
+            <ZoomOut className="w-4 h-4" />
+            <span>ย่อกลับ (ESC)</span>
+          </button>
+
+          <img
+            src={detailImageSrc}
+            alt={card.name}
+            onError={(e) => handleCardImageError(e, card.imageUrl, card)}
+            className="max-h-[88vh] max-w-[94vw] w-auto h-auto object-contain rounded-2xl shadow-[0_25px_70px_rgba(0,0,0,0.9)] border border-slate-700/70 select-none"
+          />
+
+          <div className="mt-3 text-center">
+            <div className="text-sm font-bold text-slate-100 font-['Prompt']">{card.name}</div>
+            <div className="text-xs text-slate-400 font-mono">
+              {card.id} • {card.setName}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

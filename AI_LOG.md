@@ -75,3 +75,6 @@
 [2026-11-11 23:25] Major | Antigravity | Bash | node scripts/upload-to-r2.mjs - synced all 2,014 card images to Cloudflare R2 bucket talingchancount-cards
 [2026-11-11 23:25] Major | Antigravity | Deploy | npx wrangler deploy - deployed v1.6.0 to Cloudflare Worker talingchancounttracker (talingchan.tcgcount.com)
 [2026-11-11 23:25] Major | Antigravity | Release | v1.6.0 - 2,014 cards across 39 sets with structured prototype/meme lore, R2 image sync, 4-Layer Gate, and mobile layout polish
+[2026-11-12 21:49] Major | Antigravity | Write | scripts/upgrade_hd_images.py - upgraded 436 cards with Fandom Wiki HD scans (1175x1600) and 340 cards with 2x Lanczos+UnsharpMask upscaling, uploaded all 2,014 HD images to R2
+[2026-11-12 21:49] Major | Antigravity | Edit | src/components/collection/CardDetailModal.tsx, vite.config.ts - enlarged card detail modal artwork (max-w-4xl) with full-screen zoom lightbox and switched dev server port to 5175
+[2026-11-12 21:49] Major | Antigravity | Release | v1.7.0 - High-Res Card Images on R2 & Enlarged Card Detail Modal with Full-Screen Zoom Lightbox
